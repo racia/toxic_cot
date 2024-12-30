@@ -4,7 +4,7 @@ import torch
 import torch.nn.functional as F
 import numpy as np
 from tqdm import tqdm
-from transformers import GPT2LMHeadModel, AutoModelForCausalLM, GPTNeoForCausalLM, OPTForCausalLM, GPTNeoXForCausalLM, LlamaForCausalLM, AutoModelForSeq2SeqLM 
+from transformers import GPT2LMHeadModel, AutoModelForCausalLM, AutoTokenizer, GPTNeoForCausalLM, OPTForCausalLM, GPTNeoXForCausalLM, LlamaForCausalLM, AutoModelForSeq2SeqLM 
 from functools import partial
 
 torch.random.seed = 17
@@ -74,7 +74,7 @@ class Model():
     def intervention_experiment(self, interventions, reps):
         intervention_results = {}
         progress = tqdm(total=len(interventions), desc='performing interventions')
-        for idx, intervention in enumerate(interventions):
+        for idx, intervention in enumerate(interventions): # For each data
             intervention_results[idx] = self.neuron_intervention_single_experiment(intervention=intervention, reps=reps)
             progress.update()
 
@@ -142,9 +142,17 @@ class Model():
                 'cpu')
         else:
             logits = self.model(context.to(self.device))[0].to('cpu')
+            
         logits = logits[:, -3, :].float()
+        #print(context, logits)
         probs = F.softmax(logits, dim=-1)
+        #print(probs)
+        self.model_path = f'./model/Llama-2-13b-chat-hf'
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_path, trust_remote_code=True)
         # probs = logits[:,range(logits.shape[1]), res_tok].sum(axis=-1).tolist()
+        token_ids = torch.argmax(probs, dim=-1)
+        #print(token_ids)
+        #print(self.tokenizer.decode(token_ids[0], skip_special_tokens=True))
         probs = probs[:, res_tok[0]].squeeze().tolist()
         return probs
 
@@ -178,6 +186,7 @@ class Model():
             res_alt_probs = {}
 
             for i, position in positions.items():
+                # BOS token
                 if i == 0:
                     continue
                 # assumes effect_type is indirect

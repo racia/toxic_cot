@@ -18,9 +18,9 @@ random.seed(17)
 ## argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', type=str, default='Llama-2-13b-chat-hf')
-parser.add_argument('--dataset', type=str, default='wino')
+parser.add_argument('--dataset', type=str, default='babi') #wino
 parser.add_argument('--mode', type=str, default='C2W')
-parser.add_argument('--cnt', type=int, default=10)
+parser.add_argument('--cnt', type=int, default=5) #10
 parser.add_argument('--exp', type=str, default='mlp')
 parser.add_argument('--avg', action='store_true')
 
@@ -34,11 +34,11 @@ avg = args.avg
 ## Path 
 model_path = f'./model/{model_name}'
 if model_name.startswith('Llama'):
-    cot_file_path  = f'./result/{dataset}/{model_name}_cot_answer_dev_1000.json'
-    base_file_path = f'./result/{dataset}/{model_name}_direct_answer_dev_1000.json'
-    full_cot_path = f'./result/{dataset}/{model_name}_cot_dev_1000.json'
-    mlp_avg_rep_path = f'./result/{dataset}/attn-False_cnt-100_rep_std.json' 
-    attn_avg_rep_path = f'./result/{dataset}/attn-True_cnt-100_rep_std.json'    
+    cot_file_path  = f'./result/{dataset}/{model_name}_cot_answer__task-11_5.json' #dev_1000
+    base_file_path = f'./result/{dataset}/{model_name}_direct_answer__task-11_5.json' #dev_1000
+    full_cot_path = f'./result/{dataset}/{model_name}_generate_cot__task-11_5.json' #dev_1000
+    mlp_avg_rep_path = f'./result/{dataset}/{model_name}-False-5_rep_std.json' #attn-False_cnt-100 
+    attn_avg_rep_path = f'./result/{dataset}/{model_name}-True-5_rep_std.json' #attn-True_cnt-100    
 else:
     cot_file_path  = f'./result/{dataset}/{model_name}_cot_answer_2000.json'
     base_file_path = f'./result/{dataset}/{model_name}_direct_answer_2000.json'
@@ -74,6 +74,8 @@ if model_name.startswith('Llama'):
         if dataset == 'csqa':
             # index = [41,49,158,161,174,219,244,276,283,286,297,386,394,402,413,424,431,441,443,457][:cnt]
             index = [36,331,379,395,521,525,527,599,654,826,893,913,998]
+        elif dataset == 'babi':
+            index = list(range(1, 7))
         elif dataset == 'wino':
             index = [40,47,73,175,180,185,197,232,255,266,274,306,316,327,333,409,423,427,433,444,454,481,493]
         #  index = [7, 15, 50, 53, 84, 97, 108, 119, 121, 132, 201, 207, 209, 235, 253][:cnt]
@@ -92,7 +94,7 @@ data, index = dataloader.load_data(cot_file=cot_file_path, base_file=base_file_p
 inter_data_list = []
 model = Model(model_name=model_name)
 for msg in data:
-    
+
     if model_name.startswith('Baichuan'):
         inter_data_list.append(InterventionData(msg, tokenizer, cot_prompter, model.model))
     else:
@@ -126,6 +128,7 @@ for i, result in results.items():
         values = np.array(values)
         scores[:,:,i] = values
     else:
+    
         draw_heat(labels, values, result_path+'.pdf')
 if avg:
     scores = np.mean(scores,axis=-1)

@@ -8,14 +8,14 @@ from config import *
 random.seed(17)
 
 class DataLoader():
-    def __init__(self, dataset,  data_length, split='dev', shuffle=False) -> None:
+    def __init__(self, dataset,  data_length, split='dev', shuffle=False, task_id=None) -> None:
         self.question_stem_ls = []
         self.__label_ls = []
         self.__answer_ls = []
         self.__option_ls = []
         self.idx = 0
         self.__len = data_length
-        self.__load_data(dataset, split=split)
+        self.__load_data(dataset, split=split, task_id=task_id)
         if self.__len > len(self.__label_ls):
             self.__len = len(self.__label_ls)
         if shuffle and dataset != 'hella':
@@ -32,8 +32,10 @@ class DataLoader():
         return labels
     
     
-    def __load_data(self, dataset, split):
-        if dataset == 'csqa':
+    def __load_data(self, dataset, split, task_id: str=None):
+        if dataset == "babi":
+            datapath = babi_train_data_path.format(task_id)
+        elif dataset == 'csqa':
             if split == 'train':
                 datapath = csqa_train_data_path
             else:
@@ -76,7 +78,15 @@ class DataLoader():
                 label = ""
                 answer = ""
                 options = []
-                if dataset == 'csqa':
+                if dataset == "babi":
+                    question = data["question"]["stem"]
+                    label = data["answerKey"]
+                    label = str(list(filter(lambda x: x["text"]==label, data["question"]["choices"]))[0]["label"])
+                    options = []
+                    for i in range(len(data['question']['choices'])):
+                        tup = data['question']['choices'][i]
+                        options.append(tup['text'])
+                elif dataset == 'csqa':
                     question = data['question']['stem']
                     label = str(ord(data['answerKey']) - ord("A") + 1)
                     options = []
@@ -207,10 +217,10 @@ class CoTLoader():
     
     def load_data(self, cot_file, base_file, mode=None, cnt=None, index=None):
         with open(cot_file, 'r') as f:
-            full_cot_data = json.load(f)[:-1]
+            full_cot_data = json.load(f)[:-2]
         cot_cor_data, cot_wr_data = self.__collect_tf_data(full_cot_data)
         with open(base_file, 'r') as f:
-            full_base_data = json.load(f)[:-1]
+            full_base_data = json.load(f)[:-2]
         base_cor_data, base_wr_data = self.__collect_tf_data(full_base_data)
         if not index:
             if mode == 'W2C':
@@ -229,12 +239,18 @@ class CoTLoader():
                 return  
             index = []
             question_set = []
-            for data in base_data:
+            # If wr/cor cot_data appears in cor/wr base data respectively.
+            # Wr dir → cor cot, cor dir → wr cot
+            for i, data in enumerate(base_data):
                 question_set.append(data['question'])
-            for data in cot_data:
+                print("Base: ,", i, data)
+            for i, data in enumerate(cot_data):
+                print(i, data)
                 if data['question'] in question_set:
+                    print("##########HERE############")             
                     index.append(full_cot_data.index(data))
             index = index[:cnt]
+            # Get indices of cor → wr and wr → cor data
         data = []
         for idx in index:
             if idx >= len(full_cot_data):
@@ -242,6 +258,7 @@ class CoTLoader():
             question = full_cot_data[idx]['question']
             cot = full_cot_data[idx]['answer']
             cots = self.split_cot(cot)
+            #print(cots)
             pred = full_cot_data[idx]['pred']
             label = full_cot_data[idx]['label']
             msg = {'question':question, 'answer':cot, 'steps':cots, 'pred':pred, 'label':label}
@@ -278,7 +295,7 @@ class InterventionData():
     
     
     def tokenize_data(self, tokenizer, prompter, model=None):
-        if not model:
+        if not model: #Llama
             wrap_input = prompter.wrap_input(self.question, icl_cnt=5)
             cot_input = wrap_input + self.cot + f' So the answer is: ({self.pred})'
             question_len = len(prompter.user_prompt.format(self.question))
@@ -313,13 +330,20 @@ class InterventionData():
         
         
     def get_intervention_idx(self,tokenizer):
-        
+        #Question
         self.cot_intervention_idx[1] = list(range(self.prompt_end, self.stem_end))
+        #Options
         self.cot_intervention_idx[2] = list(range(self.stem_end, self.question_end - self.margin))
+        #CoT
         self.cot_intervention_idx[3] = list(range(self.question_end, self.cot_end))
+        #Last token
         self.cot_intervention_idx[4] = [len(self.cot_input_ids[0])-3]
         
         tokens = tokenizer.convert_ids_to_tokens(self.cot_input_ids[0,self.cot_intervention_idx[2]])
+        print(tokenizer.decode(self.cot_input_ids[0, self.cot_intervention_idx[2]]))
+        # Get options
+        #print("Option tokens: ", tokens)
+        
         # self.reg_intervention_idx.append(len(self.reg_input_ids[0])-1)
     
         return 

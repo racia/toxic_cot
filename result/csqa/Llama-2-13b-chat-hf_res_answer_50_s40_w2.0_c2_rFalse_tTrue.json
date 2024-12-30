@@ -1,0 +1,12 @@
+[
+    {
+        "config": {
+            "scale_factor": 40,
+            "num_attn_candidates": 4,
+            "penalty_weights": 0.5
+        }
+    },
+    {
+        "acc": 1.0
+    }
+]

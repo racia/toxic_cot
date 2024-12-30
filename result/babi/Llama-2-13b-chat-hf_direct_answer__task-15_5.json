@@ -1,0 +1,43 @@
+[
+    {
+        "question": "Mice are afraid of wolves. Gertrude is a mouse. Cats are afraid of sheep. Winona is a mouse. Sheep are afraid of wolves. Wolves are afraid of cats. Emily is a mouse. Jessica is a wolf. What is gertrude afraid of?\n(1) cat (2) wolf ",
+        "answer": " Answer: (2) wolf.  </s>",
+        "pred": "2",
+        "label": "2",
+        "cor_flag": true
+    },
+    {
+        "question": "Mice are afraid of wolves. Gertrude is a mouse. Cats are afraid of sheep. Winona is a mouse. Sheep are afraid of wolves. Wolves are afraid of cats. Emily is a mouse. Jessica is a wolf. What is gertrude afraid of?\n(1) cat (2) wolf ",
+        "answer": " Answer: (2) wolf.</s>",
+        "pred": "2",
+        "label": "2",
+        "cor_flag": true
+    },
+    {
+        "question": "Mice are afraid of wolves. Gertrude is a mouse. Cats are afraid of sheep. Winona is a mouse. Sheep are afraid of wolves. Wolves are afraid of cats. Emily is a mouse. Jessica is a wolf. What is jessica afraid of?\n(1) cat (2) wolf ",
+        "answer": " Answer: (2) wolf. </s>",
+        "pred": "2",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Mice are afraid of wolves. Gertrude is a mouse. Cats are afraid of sheep. Winona is a mouse. Sheep are afraid of wolves. Wolves are afraid of cats. Emily is a mouse. Jessica is a wolf. What is gertrude afraid of?\n(1) cat (2) wolf ",
+        "answer": " Answer: (2) wolf.  </s>",
+        "pred": "2",
+        "label": "2",
+        "cor_flag": true
+    },
+    {
+        "question": "Sheep are afraid of mice. Emily is a sheep. Mice are afraid of sheep. Cats are afraid of sheep. Winona is a sheep. Jessica is a mouse. Gertrude is a sheep. Wolves are afraid of sheep. What is jessica afraid of?\n(1) sheep (2) mouse ",
+        "answer": " Answer: (2) mouse</s>",
+        "pred": "2",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "acc": 0.6
+    },
+    {
+        "time": 6.354256820678711
+    }
+]

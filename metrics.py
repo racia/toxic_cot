@@ -1,3 +1,4 @@
+import os
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
@@ -42,7 +43,7 @@ def draw_acc(layers, scores, label, path):
     plt.savefig(path)
     plt.close()
 
-def draw_heat(index, scores, path,  exp=None, vmax=None):
+def draw_heat(index, scores, x, y, path, mine=False, exp=None, vmax=None):
     sns.set()
     if exp == 'attn':
         ax=sns.heatmap(scores, cmap="RdBu_r", center=0, vmin=0, vmax=vmax, yticklabels=index)
@@ -50,29 +51,46 @@ def draw_heat(index, scores, path,  exp=None, vmax=None):
         ax=sns.heatmap(scores, cmap="BrBG", center=0, vmin=0,  vmax=vmax, yticklabels=index)
     else:
         ax=sns.heatmap(scores, cmap="RdBu_r", center=0)
-
     ticks = [0, 4, 9, 14, 19, 24, 29, 34, 39]
     tick_labels = [i+1 for i in ticks]
     ticks = [i+0.5 for i in ticks]
-    if exp:
-    # ax=sns.heatmap(scores, cmap="RdBu_r", xticklabels=layers, yticklabels=index)
-        # plt.ylabel('ADE', fontdict={'family' : 'Times New Roman', 'size':22})
-        plt.xlabel('Layers', fontdict={'family' : 'Times New Roman', 'size':22})
-        plt.yticks(fontproperties = 'Times New Roman', fontsize=20)
-        plt.xticks(ticks=ticks, labels=tick_labels, fontproperties = 'Times New Roman', fontsize=20)
-        plt.subplots_adjust(left=0.06, right=0.99, top=0.98, bottom=0.15)
-    else:
-        plt.ylabel('Layers', fontdict={'family' : 'Times New Roman', 'size':22})
-        plt.xlabel('Heads', fontdict={'family' : 'Times New Roman', 'size':22})
-        plt.yticks(ticks=ticks, labels=tick_labels, fontproperties = 'Times New Roman', fontsize=20)
-        plt.xticks(ticks=ticks, labels=tick_labels, fontproperties = 'Times New Roman', fontsize=20)
+
+    if mine:
+        x_ticks, y_ticks = list(range(len(x))), list(range(len(y)))
+        plt.ylabel('Cot tokens', fontdict={'size':22})
+        plt.xlabel('Q tokens', fontdict={'size':22})
+        plt.yticks(ticks=y_ticks, labels=y, fontsize=5, rotation=30) # Cot
+        plt.xticks(ticks=x_ticks, labels=index, fontsize=5, rotation=30) # Options
         plt.subplots_adjust(left=0.15, right=0.99, top=0.98, bottom=0.15)
-    cbar = ax.collections[0].colorbar
-    cbar.ax.tick_params(labelsize=20)
-    cbarlabels = cbar.ax.get_yticklabels() 
-    [label.set_fontname('Times New Roman') for label in cbarlabels]
-    plt.savefig(path)
-    plt.close()
+        cbar = ax.collections[0].colorbar
+        cbar.ax.tick_params(labelsize=5)
+        cbarlabels = cbar.ax.get_yticklabels() 
+        print(path)
+        os.makedirs("/".join(path.split("/")[:-1]), exist_ok=True)
+        plt.savefig(path)
+        plt.close()
+    else:
+        if exp:
+        # ax=sns.heatmap(scores, cmap="RdBu_r", xticklabels=layers, yticklabels=index)
+            # plt.ylabel('ADE', fontdict={'family' : 'Times New Roman', 'size':22})
+            plt.xlabel('Layers', fontdict={'family' : 'Times New Roman', 'size':22})
+            plt.yticks(fontproperties = 'Times New Roman', fontsize=20)
+            plt.xticks(ticks=ticks, labels=tick_labels, fontproperties = 'Times New Roman', fontsize=20)
+            plt.subplots_adjust(left=0.06, right=0.99, top=0.98, bottom=0.15)
+        else:
+            plt.ylabel('Layers', fontdict={'family' : 'Times New Roman', 'size':22})
+            plt.xlabel('Heads', fontdict={'family' : 'Times New Roman', 'size':22})
+            plt.yticks(ticks=ticks, labels=tick_labels, fontproperties = 'Times New Roman', fontsize=20)
+            plt.xticks(ticks=ticks, labels=tick_labels, fontproperties = 'Times New Roman', fontsize=20)
+            plt.subplots_adjust(left=0.15, right=0.99, top=0.98, bottom=0.15)
+        cbar = ax.collections[0].colorbar
+        cbar.ax.tick_params(labelsize=20)
+        cbarlabels = cbar.ax.get_yticklabels() 
+        [label.set_fontname('Times New Roman') for label in cbarlabels]
+        print(path)
+        os.makedirs("/".join(path.split("/")[:-1]), exist_ok=True)
+        plt.savefig(path)
+        plt.close()
   
 
 def draw_line_plot(x_range, results, labels, path, y_label='Scores'):

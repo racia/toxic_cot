@@ -135,8 +135,8 @@ class Model():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--model', type=str, default='Llama-2-13b-chat-hf')
-    parser.add_argument('--dataset', type=str, default='wino')
-    parser.add_argument('--datalength', type=int, default=2000)
+    parser.add_argument('--dataset', type=str, default='babi') #csqa #wino
+    parser.add_argument('--datalength', type=int, default=5) #2000
     parser.add_argument('--attn', action='store_true')
 
     args = parser.parse_args()
@@ -146,8 +146,8 @@ if __name__ == '__main__':
     attn = args.attn
     ## Path 
     model_path = f'./model/{model_name}'
-    cot_file_path  = f'./result/{dataset}/{model_name}_cot_answer_2000.json'
-    base_file_path = f'./result/{dataset}/{model_name}_direct_answer_2000.json'
+    cot_file_path  = f'./result/{dataset}/{model_name}_cot_answer__task-11_5.json' #2000
+    base_file_path = f'./result/{dataset}/{model_name}_direct_answer__task-11_5.json' #2000
     result_path = f'./result/{dataset}/{model_name}-{attn}-{datalength}_rep_std.json'
 
     ## Load Model
@@ -171,12 +171,15 @@ if __name__ == '__main__':
     for key in inter_dic.keys():
         reps[key] = {k:[] for k in range(model.num_layers)}
     for msg in tqdm(data):
+        print(msg["steps"])
         if model_name.startswith('Baichuan'):
             inter_data = InterventionData(msg, tokenizer, cot_prompter, model.model)
         else:
             inter_data = InterventionData(msg, tokenizer, cot_prompter)
         rep = model.cal_rep(inter_data)
+        #print("rep.shape: ", rep.shape)
         for key in inter_dic.keys():
+            #print("key.shape: ", key.shape)
             for k in range(model.num_layers):
                 reps[key][k].append(rep[key][k])
     results = {}

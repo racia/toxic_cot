@@ -1,0 +1,43 @@
+[
+    {
+        "question": "The office is north of the kitchen. The garden is south of the kitchen. What is north of the kitchen?\n(1) office ",
+        "answer": " Answer: (1) office</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "The kitchen is west of the garden. The hallway is west of the kitchen. What is the garden east of?\n(1) kitchen ",
+        "answer": " Answer: (2) hallway</s>",
+        "pred": "2",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "The garden is north of the office. The bedroom is north of the garden. What is north of the garden?\n(1) bedroom ",
+        "answer": " Answer: (1) bedroom</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "The bedroom is west of the hallway. The kitchen is west of the bedroom. What is the hallway east of?\n(1) bedroom ",
+        "answer": " Answer: (4) kitchen</s>",
+        "pred": "4",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "The bathroom is east of the bedroom. The kitchen is west of the bedroom. What is the bedroom east of?\n(1) kitchen ",
+        "answer": " Answer: (2) bathroom</s>",
+        "pred": "2",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "acc": 0.4
+    },
+    {
+        "time": 5.952211332321167
+    }
+]

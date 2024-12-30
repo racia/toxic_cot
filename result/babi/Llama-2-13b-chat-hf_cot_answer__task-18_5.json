@@ -1,0 +1,43 @@
+[
+    {
+        "question": "The box of chocolates fits inside the chest. The box is bigger than the chest. The box is bigger than the suitcase. The suitcase fits inside the box. The container is bigger than the box of chocolates. Does the box fit in the box of chocolates?\n(1) yes (2) no ",
+        "answer": " If the box fits inside the chest and the chest is bigger than the box of chocolates, then the box is smaller than the chest. If the box is smaller than the chest, it does not fit inside the box of chocolates. So the answer is: (2) no.</s>",
+        "pred": "2",
+        "label": "2",
+        "cor_flag": true
+    },
+    {
+        "question": "The box of chocolates fits inside the chest. The box is bigger than the chest. The box is bigger than the suitcase. The suitcase fits inside the box. The container is bigger than the box of chocolates. Is the box of chocolates bigger than the box?\n(1) yes (2) no ",
+        "answer": " The box of chocolates is not bigger than the box. This is because the box of chocolates fits inside the box, and the box is bigger than the suitcase. ",
+        "pred": "None",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "question": "The box of chocolates fits inside the chest. The box is bigger than the chest. The box is bigger than the suitcase. The suitcase fits inside the box. The container is bigger than the box of chocolates. Is the box bigger than the box of chocolates?\n(1) yes (2) no ",
+        "answer": " Since the box is bigger than the chest and the suitcase, it means that the box is bigger than the box of chocolates. So the answer is: (1) yes.</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "The box of chocolates fits inside the chest. The box is bigger than the chest. The box is bigger than the suitcase. The suitcase fits inside the box. The container is bigger than the box of chocolates. Does the box of chocolates fit in the box?\n(1) yes (2) no ",
+        "answer": " If the box of chocolates fits inside the chest, then it is smaller than the chest. If the box is bigger than the suitcase, then the suitcase fits inside the box. Therefore, the box of chocolates does not fit in the box. So the answer is: (2) no. </s>",
+        "pred": "2",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "The box of chocolates fits inside the chest. The box is bigger than the chest. The box is bigger than the suitcase. The suitcase fits inside the box. The container is bigger than the box of chocolates. Does the box fit in the box of chocolates?\n(1) yes (2) no ",
+        "answer": " We know that the box is bigger than the chest and the suitcase. So the box does not fit inside the chest. ",
+        "pred": "None",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "acc": 0.4
+    },
+    {
+        "time": 35.33775000572204
+    }
+]

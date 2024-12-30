@@ -1,0 +1,43 @@
+[
+    {
+        "question": "Fred is either in the school or the park. Mary went back to the office. Is Mary in the office?\n(1) yes (2) maybe (3) no ",
+        "answer": " If Fred is either in the school or the park, and Mary went back to the office, it means that Mary is not in the school or the park. Therefore, the answer is: (3) no.</s>",
+        "pred": "3",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Fred is either in the school or the park. Mary went back to the office. Bill is either in the kitchen or the park. Fred moved to the cinema. Is Fred in the park?\n(1) yes (2) maybe (3) no ",
+        "answer": " If Mary went back to the office, then Fred is not in the office. If Bill is in the kitchen, then Fred is not in the kitchen. Therefore, Fred is in the park. So the answer is: (1) yes. </s>",
+        "pred": "1",
+        "label": "3",
+        "cor_flag": false
+    },
+    {
+        "question": "Fred is either in the school or the park. Mary went back to the office. Bill is either in the kitchen or the park. Fred moved to the cinema. Fred is in the office. Bill moved to the cinema. Is Bill in the cinema?\n(1) yes (2) maybe (3) no ",
+        "answer": " If Fred is in the office, and Bill moved to the cinema, then Bill is not in the cinema. If Bill is not in the cinema, then the answer is: (3) no.</s>",
+        "pred": "3",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Fred is either in the school or the park. Mary went back to the office. Bill is either in the kitchen or the park. Fred moved to the cinema. Fred is in the office. Bill moved to the cinema. Bill is in the park. Bill is either in the office or the kitchen. Is Bill in the office?\n(1) yes (2) maybe (3) no ",
+        "answer": " Let's break down the information given:",
+        "pred": "None",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "question": "Fred is either in the school or the park. Mary went back to the office. Bill is either in the kitchen or the park. Fred moved to the cinema. Fred is in the office. Bill moved to the cinema. Bill is in the park. Bill is either in the office or the kitchen. Bill is either in the cinema or the park. Mary moved to the park. Is Bill in the park?\n(1) yes (2) maybe (3) no ",
+        "answer": " We know that Bill is in the park because Mary moved to the park. If Bill is in the park, the answer is (1) yes.  </s>",
+        "pred": "1",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "acc": 0.0
+    },
+    {
+        "time": 37.63750329017639
+    }
+]

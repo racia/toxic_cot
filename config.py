@@ -1,4 +1,6 @@
 #data_path
+babi_train_data_path = './data/qa{}_train.jsonl'
+
 csqa_train_data_path = './data/CommonsenseQA/train_rand_split.jsonl'
 csqa_dev_data_path = './data/CommonsenseQA/dev_rand_split.jsonl'
 

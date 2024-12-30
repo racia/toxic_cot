@@ -1,0 +1,43 @@
+[
+    {
+        "question": "The office is east of the hallway. The kitchen is north of the office. The garden is west of the bedroom. The office is west of the garden. The bathroom is north of the garden. How do you go from the kitchen to the garden?\n(1) s,e ",
+        "answer": " From the information given, we know that the office is east of the hallway, and the office is west of the garden. Therefore, the garden is east of the hallway.\n\nFrom the kitchen, we can go east to reach the garden. So the answer is: (1) s.</s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "The bedroom is west of the hallway. The office is east of the garden. The garden is north of the kitchen. The kitchen is north of the bathroom. The hallway is west of the garden. How do you go from the kitchen to the hallway?\n(1) n,w ",
+        "answer": " From the information given, the kitchen is north of the bathroom, and the hallway is west of the garden. So, to get from the kitchen to the hallway, you have to go north and then west. Therefore, the answer is: (1) n,w.</s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "The bedroom is south of the hallway. The bathroom is east of the office. The kitchen is west of the garden. The garden is south of the office. The office is south of the bedroom. How do you go from the garden to the bedroom?\n(1) n,n ",
+        "answer": " We know the following directions:\n\n* The garden is south of the office.\n* The office is south of the bedroom.\n\nSo, we can conclude that the bedroom is north of the garden. Therefore, the answer is: (1) north.</s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "The bedroom is north of the hallway. The garden is west of the kitchen. The bathroom is south of the kitchen. The office is north of the bedroom. The hallway is east of the kitchen. How do you go from the bedroom to the kitchen?\n(1) s,w ",
+        "answer": " The bedroom is north of the hallway, so we go north.\nThe hallway is east of the kitchen, so we go east.\nSo the answer is: (1) s,e</s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "The office is north of the kitchen. The bathroom is south of the bedroom. The bathroom is west of the kitchen. The hallway is east of the bedroom. The kitchen is north of the garden. How do you go from the bedroom to the kitchen?\n(1) s,e ",
+        "answer": " We know that the bedroom is south of the hallway and the kitchen is north of the hallway. So we can go from the bedroom to the kitchen by going north. So the answer is: (1) north. </s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "acc": 0.0
+    },
+    {
+        "time": 33.29108033180237
+    }
+]

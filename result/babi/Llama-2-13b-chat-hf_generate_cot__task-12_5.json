@@ -1,0 +1,43 @@
+[
+    {
+        "question": "Mary and Daniel travelled to the bathroom. John and Daniel travelled to the office. Where is Daniel?\n(1) bathroom (2) bedroom (3) garden (4) office ",
+        "answer": " Based on the information given, Daniel is in the office with John. So the answer is: (4) office. </s>",
+        "pred": "None",
+        "label": "4",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary and Daniel travelled to the bathroom. John and Daniel travelled to the office. Sandra and Daniel moved to the kitchen. Sandra and John moved to the garden. Where is Sandra?\n(1) bathroom (2) bedroom (3) garden (4) office ",
+        "answer": " Based on the information given, Sandra is in the kitchen. So the answer is: (3) kitchen. </s>",
+        "pred": "None",
+        "label": "3",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary and Daniel travelled to the bathroom. John and Daniel travelled to the office. Sandra and Daniel moved to the kitchen. Sandra and John moved to the garden. Mary and Sandra went to the bedroom. Mary and Daniel moved to the garden. Where is Sandra?\n(1) bathroom (2) bedroom (3) garden (4) office ",
+        "answer": " We know that Sandra moved to the kitchen, then to the garden. So the answer is: (3) garden.</s>",
+        "pred": "None",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary and Daniel travelled to the bathroom. John and Daniel travelled to the office. Sandra and Daniel moved to the kitchen. Sandra and John moved to the garden. Mary and Sandra went to the bedroom. Mary and Daniel moved to the garden. Daniel and Mary went to the bathroom. Sandra and Mary travelled to the garden. Where is Daniel?\n(1) bathroom (2) bedroom (3) garden (4) office ",
+        "answer": " From the given information, Daniel moved to the bathroom, then to the garden, and then to the bedroom. Therefore, the correct answer is: (3) garden. </s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary and Daniel travelled to the bathroom. John and Daniel travelled to the office. Sandra and Daniel moved to the kitchen. Sandra and John moved to the garden. Mary and Sandra went to the bedroom. Mary and Daniel moved to the garden. Daniel and Mary went to the bathroom. Sandra and Mary travelled to the garden. John and Sandra travelled to the hallway. John and Sandra went back to the office. Where is John?\n(1) bathroom (2) bedroom (3) garden (4) office ",
+        "answer": " Based on the given information, we know that:\n\n* Mary and Daniel went to the bathroom.\n* John and Daniel went to the office.\n* Sandra and Daniel went to the kitchen.\n* Sandra and John went to the garden.\n* Mary and Sandra went to the bedroom.\n* Daniel and Mary went to the bathroom.\n* Sandra and Mary went to the garden.\n* John and Sandra went to the hallway.\n\nFrom the information, we can see that John is in the hallway. So the answer is: (5) hallway.</s>",
+        "pred": "None",
+        "label": "4",
+        "cor_flag": false
+    },
+    {
+        "acc": 0.0
+    },
+    {
+        "time": 32.18778028488159
+    }
+]

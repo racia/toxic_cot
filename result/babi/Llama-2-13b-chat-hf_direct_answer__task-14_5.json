@@ -1,0 +1,43 @@
+[
+    {
+        "question": "Bill went back to the cinema yesterday. Julie went to the school this morning. Fred went to the park yesterday. Yesterday Julie went to the office. Where was Julie before the school?\n(1) cinema (2) park (3) office ",
+        "answer": " Answer: (3) office. </s>",
+        "pred": "3",
+        "label": "3",
+        "cor_flag": true
+    },
+    {
+        "question": "Bill went back to the cinema yesterday. Julie went to the school this morning. Fred went to the park yesterday. Yesterday Julie went to the office. This afternoon Julie travelled to the cinema. Yesterday Mary travelled to the park. Where was Julie before the school?\n(1) cinema (2) park (3) office ",
+        "answer": " Answer: (3) office.  </s>",
+        "pred": "3",
+        "label": "3",
+        "cor_flag": true
+    },
+    {
+        "question": "Bill went back to the cinema yesterday. Julie went to the school this morning. Fred went to the park yesterday. Yesterday Julie went to the office. This afternoon Julie travelled to the cinema. Yesterday Mary travelled to the park. Bill went back to the school this morning. This evening Julie went to the school. Where was Julie before the school?\n(1) cinema (2) park (3) office ",
+        "answer": " Answer: (3) office.</s>",
+        "pred": "3",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Bill went back to the cinema yesterday. Julie went to the school this morning. Fred went to the park yesterday. Yesterday Julie went to the office. This afternoon Julie travelled to the cinema. Yesterday Mary travelled to the park. Bill went back to the school this morning. This evening Julie went to the school. Fred moved to the office this morning. This afternoon Bill went to the park. Where was Bill before the school?\n(1) cinema (2) park (3) office ",
+        "answer": " Answer: (3) office.</s>",
+        "pred": "3",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Bill went back to the cinema yesterday. Julie went to the school this morning. Fred went to the park yesterday. Yesterday Julie went to the office. This afternoon Julie travelled to the cinema. Yesterday Mary travelled to the park. Bill went back to the school this morning. This evening Julie went to the school. Fred moved to the office this morning. This afternoon Bill went to the park. This afternoon Fred moved to the park. Bill moved to the school this evening. Where was Bill before the school?\n(1) cinema (2) park (3) office ",
+        "answer": " Answer: (3) office. </s>",
+        "pred": "3",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "acc": 0.4
+    },
+    {
+        "time": 6.302370500564575
+    }
+]

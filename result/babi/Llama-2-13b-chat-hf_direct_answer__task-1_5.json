@@ -1,0 +1,43 @@
+[
+    {
+        "question": "Mary moved to the bathroom. John went to the hallway. Where is Mary?\n(1) bathroom (2) hallway (3) office ",
+        "answer": " Answer: (1) bathroom.</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "Mary moved to the bathroom. John went to the hallway. Daniel went back to the hallway. Sandra moved to the garden. Where is Daniel?\n(1) bathroom (2) hallway (3) office ",
+        "answer": " Answer: (2) hallway</s>",
+        "pred": "2",
+        "label": "2",
+        "cor_flag": true
+    },
+    {
+        "question": "Mary moved to the bathroom. John went to the hallway. Daniel went back to the hallway. Sandra moved to the garden. John moved to the office. Sandra journeyed to the bathroom. Where is Daniel?\n(1) bathroom (2) hallway (3) office ",
+        "answer": " Answer: (2) hallway.</s>",
+        "pred": "2",
+        "label": "2",
+        "cor_flag": true
+    },
+    {
+        "question": "Mary moved to the bathroom. John went to the hallway. Daniel went back to the hallway. Sandra moved to the garden. John moved to the office. Sandra journeyed to the bathroom. Mary moved to the hallway. Daniel travelled to the office. Where is Daniel?\n(1) bathroom (2) hallway (3) office ",
+        "answer": " Answer: (3) office.</s>",
+        "pred": "3",
+        "label": "3",
+        "cor_flag": true
+    },
+    {
+        "question": "Mary moved to the bathroom. John went to the hallway. Daniel went back to the hallway. Sandra moved to the garden. John moved to the office. Sandra journeyed to the bathroom. Mary moved to the hallway. Daniel travelled to the office. John went back to the garden. John moved to the bedroom. Where is Sandra?\n(1) bathroom (2) hallway (3) office ",
+        "answer": " Answer: (3) office.</s>",
+        "pred": "3",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "acc": 0.8
+    },
+    {
+        "time": 6.2827136516571045
+    }
+]

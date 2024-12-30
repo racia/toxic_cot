@@ -1,0 +1,43 @@
+[
+    {
+        "question": "Bill went back to the cinema yesterday. Julie went to the school this morning. Fred went to the park yesterday. Yesterday Julie went to the office. Where was Julie before the school?\n(1) cinema (2) park (3) office ",
+        "answer": " We know that Julie went to the school this morning, and she went to the office yesterday. So, she must have been at home before going to the school. Therefore, the answer is: (3) office. </s>",
+        "pred": "3",
+        "label": "3",
+        "cor_flag": true
+    },
+    {
+        "question": "Bill went back to the cinema yesterday. Julie went to the school this morning. Fred went to the park yesterday. Yesterday Julie went to the office. This afternoon Julie travelled to the cinema. Yesterday Mary travelled to the park. Where was Julie before the school?\n(1) cinema (2) park (3) office ",
+        "answer": " Based on the information given, Julie went to the office before going to school. So the answer is: (3) office.</s>",
+        "pred": "3",
+        "label": "3",
+        "cor_flag": true
+    },
+    {
+        "question": "Bill went back to the cinema yesterday. Julie went to the school this morning. Fred went to the park yesterday. Yesterday Julie went to the office. This afternoon Julie travelled to the cinema. Yesterday Mary travelled to the park. Bill went back to the school this morning. This evening Julie went to the school. Where was Julie before the school?\n(1) cinema (2) park (3) office ",
+        "answer": " We can see that Julie went to the school this morning, and yesterday she went to the office. So Julie went to the office before she went to the school. Therefore, the answer is: (3) office. </s>",
+        "pred": "3",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Bill went back to the cinema yesterday. Julie went to the school this morning. Fred went to the park yesterday. Yesterday Julie went to the office. This afternoon Julie travelled to the cinema. Yesterday Mary travelled to the park. Bill went back to the school this morning. This evening Julie went to the school. Fred moved to the office this morning. This afternoon Bill went to the park. Where was Bill before the school?\n(1) cinema (2) park (3) office ",
+        "answer": " Based on the information given:",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Bill went back to the cinema yesterday. Julie went to the school this morning. Fred went to the park yesterday. Yesterday Julie went to the office. This afternoon Julie travelled to the cinema. Yesterday Mary travelled to the park. Bill went back to the school this morning. This evening Julie went to the school. Fred moved to the office this morning. This afternoon Bill went to the park. This afternoon Fred moved to the park. Bill moved to the school this evening. Where was Bill before the school?\n(1) cinema (2) park (3) office ",
+        "answer": " According to the information, Bill went back to the school this morning, which means he was at the school before going back. So the answer is: (3) office.</s>",
+        "pred": "3",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "acc": 0.4
+    },
+    {
+        "time": 35.2048318862915
+    }
+]

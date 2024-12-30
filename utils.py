@@ -25,7 +25,7 @@ class KeywordsStoppingCriteria(StoppingCriteria):
             if input_ids[0][-1] in self.keywords:
                 return True
             return False
-stop_words = ['</s>', '<s>', '</s><s>']
+stop_words = ['</s>', '<s>']# '</s><s>']
 
 def llama_generate(model, config, tokenizer, input, task):
     stop_ids = [tokenizer.encode(w)[0] for w in stop_words]
@@ -66,6 +66,7 @@ def parse_result(output, task, tokenizer=None, chat=True):
             result = output
         else:
             result = output[0][1]['choices'][0]['message']['content']
+            #print(result)
         if task == 'generate_cot':
             return result, '' 
         elif task == 'cons_answer':
@@ -76,7 +77,8 @@ def parse_result(output, task, tokenizer=None, chat=True):
                 pred = 'None'
         else:
             result = result.split('\n\n')[0]
-            pred = result.split(':')[-1] 
+            #print(result)
+            pred = result.rsplit(':', 1)[-1]
     return result, pred
 
 

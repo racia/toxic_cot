@@ -1,0 +1,43 @@
+[
+    {
+        "question": "Mary moved to the bathroom. Sandra journeyed to the bedroom. Mary got the football there. John went to the kitchen. Mary went back to the kitchen. Mary went back to the garden. Where is the football?\n(1) garden (2) hallway (3) kitchen ",
+        "answer": " Answer: (3) kitchen. </s>",
+        "pred": "3",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary moved to the bathroom. Sandra journeyed to the bedroom. Mary got the football there. John went to the kitchen. Mary went back to the kitchen. Mary went back to the garden. Sandra went back to the office. John moved to the office. Sandra journeyed to the hallway. Daniel went back to the kitchen. Mary dropped the football. John got the milk there. Where is the football?\n(1) garden (2) hallway (3) kitchen ",
+        "answer": " Answer: (3) kitchen.</s>",
+        "pred": "3",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary moved to the bathroom. Sandra journeyed to the bedroom. Mary got the football there. John went to the kitchen. Mary went back to the kitchen. Mary went back to the garden. Sandra went back to the office. John moved to the office. Sandra journeyed to the hallway. Daniel went back to the kitchen. Mary dropped the football. John got the milk there. Mary took the football there. Sandra picked up the apple there. Mary travelled to the hallway. John journeyed to the kitchen. Where is the football?\n(1) garden (2) hallway (3) kitchen ",
+        "answer": " Answer: (3) kitchen.</s>",
+        "pred": "3",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary moved to the bathroom. Sandra journeyed to the bedroom. Mary got the football there. John went to the kitchen. Mary went back to the kitchen. Mary went back to the garden. Sandra went back to the office. John moved to the office. Sandra journeyed to the hallway. Daniel went back to the kitchen. Mary dropped the football. John got the milk there. Mary took the football there. Sandra picked up the apple there. Mary travelled to the hallway. John journeyed to the kitchen. John moved to the hallway. Sandra left the apple. Where is the apple?\n(1) garden (2) hallway (3) kitchen ",
+        "answer": " Answer: (3) kitchen.</s>",
+        "pred": "3",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary moved to the bathroom. Sandra journeyed to the bedroom. Mary got the football there. John went to the kitchen. Mary went back to the kitchen. Mary went back to the garden. Sandra went back to the office. John moved to the office. Sandra journeyed to the hallway. Daniel went back to the kitchen. Mary dropped the football. John got the milk there. Mary took the football there. Sandra picked up the apple there. Mary travelled to the hallway. John journeyed to the kitchen. John moved to the hallway. Sandra left the apple. Mary got the apple there. John travelled to the garden. John went back to the hallway. John went back to the bedroom. Mary journeyed to the bedroom. John journeyed to the kitchen. John left the milk. Mary left the apple. Where is the milk?\n(1) garden (2) hallway (3) kitchen ",
+        "answer": " Answer: (3) kitchen.</s>",
+        "pred": "3",
+        "label": "3",
+        "cor_flag": true
+    },
+    {
+        "acc": 0.2
+    },
+    {
+        "time": 6.236071348190308
+    }
+]

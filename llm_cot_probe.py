@@ -16,11 +16,11 @@ from sklearn.preprocessing import normalize
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', type=str, default='Llama-2-13b-chat-hf')
-parser.add_argument('--dataset', type=str, default='wino')
+parser.add_argument('--dataset', type=str, default='babi') #wino
 parser.add_argument('--mode', type=str, default=None)
 parser.add_argument('--score', type=str, default=None)
 parser.add_argument('--avg', action='store_true')
-parser.add_argument('--cnt', type=int, default=1000)
+parser.add_argument('--cnt', type=int, default=5) #1000
 parser.add_argument('--reg', action='store_true')
 parser.add_argument('--loss', type=str, default='cot')
 parser.add_argument('--diff', action='store_true')
@@ -44,12 +44,12 @@ swap = args.swap
 
 model_path = f'./model/{model_name}'
 if model_name[:5] == 'Llama':
-    cot_file_path  = f'./result/{dataset}/{model_name}_cot_answer_dev_1000.json'
-    base_file_path = f'./result/{dataset}/{model_name}_direct_answer_dev_1000.json'
+    cot_file_path  = f'./result/{dataset}/{model_name}_cot_answer__task-3_5.json' #dev_1000
+    base_file_path = f'./result/{dataset}/{model_name}_direct_answer__task-3_5.json' #dev_1000
 else:
     cot_file_path  = f'./result/{dataset}/{model_name}_cot_answer_2000.json'
     base_file_path = f'./result/{dataset}/{model_name}_direct_answer_2000.json'
-full_cot_path = f'./result/{dataset}/{model_name}_cot_dev_1000.json'
+full_cot_path = f'./result/{dataset}/{model_name}_generate_cot__task-3_5.json' #dev_1000
 result_path = f'./result/{dataset}/fig/{score}/{model_name}_m-{mode}_c-{cnt}_r-{reg}_d-{diff}_l-{loss_type}_re-{res}_s{swap}'
 res_cot_path = f'./result/{dataset}/res.json'
 swap_file_path = f'./result/{dataset}/{model_name}_rt_result_2000_rFalse.json'
@@ -94,7 +94,7 @@ class Probe():
                 question_len = len(cot_prompter.user_prompt.format(question))
                 prompt = cot_prompter.wrap_input(question, icl_cnt=5)[:-question_len]
                 wrap_question = cot_prompter.wrap_input(question, icl_cnt=5)
-                if loss_type == 'cot':
+                if loss_type == 'cot': #With answer already provided
                     input_text = wrap_question + cot 
                 else:
                     input_text = wrap_question + cot + f' So the answer is: ({label})' 
@@ -207,7 +207,7 @@ class Probe():
     def cal_attn(self, question, label, cot, layers):  
         if model_name.startswith('Llama'):
             question_len = len(cot_prompter.user_prompt.format(question))
-            prompt = cot_prompter.wrap_input(question, icl_cnt=5)[:-question_len]
+            prompt = cot_prompter.wrap_input(question, icl_cnt=5)[:-question_len] # w/o question
             wrap_question = cot_prompter.wrap_input(question, icl_cnt=5)
             input_text = wrap_question + cot + f' So the answer is: ({label})'
             input_ids = tokenizer(input_text, return_tensors="pt").input_ids.to(model.device)
@@ -237,24 +237,53 @@ class Probe():
             output_attentions=True,
             output_hidden_states=False,
         )
-        del input_ids
+        print("CoT length: ", cot_len-question_len-prompt_len-prompt_len)
+        print("Question length: ", stem_len-prompt_len)
+        
+        input_ids = input_ids[0, prompt_len:].detach().cpu().numpy()
+        print(input_ids.shape)
         scores = []
-        for layer in layers:
-            attn_values = outputs['attentions'][layer]
-            attn_values = torch.squeeze(attn_values)
-            attn_scores = attn_values[:, prompt_len:, prompt_len:].detach().cpu().numpy()  
-            if loss_type == 'cot':
-                attn_scores = attn_scores[:, question_len-prompt_len:cot_len-prompt_len, :stem_len-prompt_len].sum(axis=-1).sum(axis=-1)
-            else:
-                attn_scores = attn_scores[:, cot_len-prompt_len:, :stem_len-prompt_len].sum()
-            # fig_path = os.path.join(fold_path, f'layer-{layer+1}.pdf')
-            # draw_attr_heat(attn_scores, x_tokens, y_tokens, fig_path)
-            scores.append(attn_scores)
-            del attn_values, attn_scores
-            
-            torch.cuda.empty_cache()
+
+
+        #for layer in layers:
+        attn_values = outputs['attentions']#.sum(axis=0) #["layer"] Sum over 40 layers
+        #print(sum(attn_values), type(sum(attn_values)))
+        attn_values = sum(attn_values)
+        assert torch.is_tensor(attn_values)
+        attn_values = torch.squeeze(attn_values)
+        attn_scores = attn_values[:, prompt_len:, prompt_len:].detach().cpu().numpy() #w/o system prompt
+        
+        if loss_type == 'cot':
+            # Sum over 40 heads
+            attn_scores = attn_scores[:, question_len-prompt_len:cot_len-prompt_len, :question_len-prompt_len].sum(axis=0)#.sum(axis=-1) (41, 85)
+            #attn_scores = attn_scores.T # (85, 41)
+            top_k_attn_scores = np.partition(attn_scores.T, -3, axis=0)[-3:] # Take top attended word from options given CoT (3, 41)
+            top_k_attn_indices = np.argpartition(attn_scores.T, -3, axis=0)[-3:].squeeze() # Take top attended word from options given CoT (3, 41)
+          #  att_indices = iter(top_k_attn_indices)
+            #top_k_attn_scores = top_k_attn_scores.T # (41, 3)
+
+            print("Attn scores shape: ", attn_scores.shape)
+            for cot_tok, i in enumerate(top_k_attn_scores.T): # (41, 3)
+                for j, tok in zip(top_k_attn_scores.T[cot_tok], input_ids[top_k_attn_indices.T[cot_tok]]): # Attention for first Cot token
+                    print(j, tokenizer.decode(tok))#, input_ids[question_len-prompt_len+cot_tok])
+        else:
+            attn_scores = attn_scores[:, cot_len-prompt_len:, :stem_len-prompt_len].sum()
+
+        y_tokens = tokenizer.convert_ids_to_tokens(input_ids[question_len-prompt_len:cot_len-prompt_len])
+        x_tokens = tokenizer.convert_ids_to_tokens(input_ids[stem_len-prompt_len:question_len-prompt_len]) # Take options
+        print(stem_len-prompt_len, question_len-prompt_len)
+        index = x_tokens #41
+        fig_path = os.path.join(result_path, f'x.pdf')
+        draw_heat(index, attn_scores, x_tokens, y_tokens, fig_path, mine=True)
+        #draw_attr_heat(index, attn_scores, fig_path)
+        #del input_ids
+        scores.append(attn_scores)
+        del attn_values, attn_scores
+        
+        torch.cuda.empty_cache()
         del outputs
         torch.cuda.empty_cache()
+        #print(scores[0])
         return scores
     
     
@@ -347,12 +376,15 @@ class Probe():
                     scores = np.array(reg_scores) / len(reg_steps) - np.array(scores) / len(steps)
                 
                 if avg:
+                    # Take avg attention over all layers
+                    print(scores[0])
                     pred_scores_ls.append(scores) 
                 else:   
                     fig_path = result_path + f'_idx-{idx}.pdf'
                     layers = [i+1 for i in layers]
-                    index = list(range(len(scores.shape[1])))
-                    draw_heat(layers,  index, scores.tolist(), fig_path)
+                    index = list(range(len(scores))) #.shape[1]
+                    os.makedirs("/".join(result_path.split("/")[:-1]), exist_ok=True)
+                    draw_heat(index, scores, fig_path) #tolist()
             
             elif score == 'attn_attr':
                 if reg or res:
@@ -453,12 +485,14 @@ def get_index(mode, dataset):
     index = None
     if model_name[:5] == 'Llama':
         if mode == 'C2W':
-            if dataset == 'csqa':
+            if dataset == 'csqa': #csqa
                 # index = [41,49,158,161,174,244,276,283,286,297,386,394,402,413,424,431,441,443,457,523,539,652,700,709,754,869,881,898,939,946]
                 if loss_type == 'label':
                     index = [36,331,379,395,521,525,527,599,654,826,893,913,998]
                 else:
-                    index =[41,49,158,161,174,244,276,283,286,297,386,394,402,413,424,431,441,443,457,523,539,652,700,709,754,869,881,898,939,946]
+                    index = [41,49,158,161,174,244,276,283,286,297,386,394,402,413,424,431,441,443,457,523,539,652,700,709,754,869,881,898,939,946]
+            elif dataset == "babi":
+                index = list(range(1, 7))
             elif dataset == 'wino':
                 if loss_type == 'label':
                     index = [40,47,73,175,180,185,197,232,255,266,274,306,316,327,333,409,423,427,433,444,454,481,493]
@@ -497,7 +531,7 @@ if __name__ == '__main__':
         
     # else:
     index = get_index(mode='C2W', dataset=dataset)
-    data, index = dataloader.load_data(cot_file=cot_file_path, base_file=base_file_path, cnt=cnt, index=index)
+    data, index = dataloader.load_data(cot_file=base_file_path, base_file=cot_file_path, cnt=cnt, index=index)
     if res:
         res_data = []
         res_index = []
@@ -528,6 +562,7 @@ if __name__ == '__main__':
     if score == 'attn':
         if loss_type == 'cot':    
             index = layers
+            # Attn
             draw_heat(index, results.tolist(), fig_path) 
         else:  
             labels = ['Drift', 'Correct'] 

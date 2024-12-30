@@ -1,0 +1,43 @@
+[
+    {
+        "question": "Mary is no longer in the bedroom. Daniel moved to the hallway. Is Mary in the bedroom?\n(1) no ",
+        "answer": " If Daniel is in the hallway, then Mary is not in the bedroom. So the answer is: (1) no.</s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary is no longer in the bedroom. Daniel moved to the hallway. Sandra moved to the bedroom. Sandra is in the bathroom. Is Daniel in the bathroom?\n(1) no ",
+        "answer": " Based on the information provided, Daniel is not in the bathroom. The only person in the bathroom is Sandra. So the answer is: (1) no. </s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary is no longer in the bedroom. Daniel moved to the hallway. Sandra moved to the bedroom. Sandra is in the bathroom. Daniel is not in the hallway. Daniel is in the office. Is Sandra in the office?\n(1) no ",
+        "answer": " We know that Daniel is not in the hallway and Daniel is in the office. So, Daniel is not in the hallway anymore. And we also know that Sandra is in the bedroom, and she moved to the bathroom. So, Sandra is not in the bedroom anymore. Therefore, Sandra is not in the office either.\n\nSo the answer is: (1) no.</s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary is no longer in the bedroom. Daniel moved to the hallway. Sandra moved to the bedroom. Sandra is in the bathroom. Daniel is not in the hallway. Daniel is in the office. Sandra went to the bedroom. John went to the kitchen. Is Sandra in the office?\n(1) no ",
+        "answer": " We know that Sandra went to the bedroom, and Daniel moved to the office. So, Sandra is not in the office. Therefore, the answer is: (1) no. </s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary is no longer in the bedroom. Daniel moved to the hallway. Sandra moved to the bedroom. Sandra is in the bathroom. Daniel is not in the hallway. Daniel is in the office. Sandra went to the bedroom. John went to the kitchen. Sandra is not in the bedroom. Mary is no longer in the bathroom. Is Sandra in the bedroom?\n(1) no ",
+        "answer": " Based on the information given:\n\n* Sandra moved to the bedroom.\n* Sandra is in the bathroom.\n\nSo, Sandra is not in the bedroom.\n\nTherefore, the answer is: (1) no.</s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "acc": 0.0
+    },
+    {
+        "time": 32.31302604675293
+    }
+]

@@ -1,0 +1,43 @@
+[
+    {
+        "question": "The triangle is above the pink rectangle. The blue square is to the left of the triangle. Is the pink rectangle to the right of the blue square?\n(1) yes (2) no ",
+        "answer": " Based on the information given, the pink rectangle is not to the right of the blue square. The blue square is to the left of the triangle, and the triangle is above the pink rectangle. Therefore, the pink rectangle is not to the right of the blue square. The answer is: (2) no.</s>",
+        "pred": "2",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "The triangle is above the pink rectangle. The blue square is to the left of the triangle. Is the blue square below the pink rectangle?\n(1) yes (2) no ",
+        "answer": " If the triangle is above the pink rectangle, and the blue square is to the left of the triangle, then the blue square must be below the pink rectangle. So the answer is: (2) no. </s>",
+        "pred": "2",
+        "label": "2",
+        "cor_flag": true
+    },
+    {
+        "question": "The triangle is above the pink rectangle. The blue square is to the left of the triangle. Is the blue square to the right of the pink rectangle?\n(1) yes (2) no ",
+        "answer": " If the triangle is above the pink rectangle, and the blue square is to the left of the triangle, then the blue square must be below the pink rectangle. Therefore, the answer is: (2) no. </s>",
+        "pred": "2",
+        "label": "2",
+        "cor_flag": true
+    },
+    {
+        "question": "The triangle is above the pink rectangle. The blue square is to the left of the triangle. Is the blue square below the pink rectangle?\n(1) yes (2) no ",
+        "answer": " Since the triangle is above the pink rectangle, the blue square must be below the pink rectangle. So the answer is: (2) no. </s>",
+        "pred": "2",
+        "label": "2",
+        "cor_flag": true
+    },
+    {
+        "question": "The triangle is above the pink rectangle. The blue square is to the left of the triangle. Is the blue square below the pink rectangle?\n(1) yes (2) no ",
+        "answer": " If the triangle is above the pink rectangle, then the blue square must be below the pink rectangle. So the answer is: (1) yes.</s>",
+        "pred": "1",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "acc": 0.6
+    },
+    {
+        "time": 30.522423648834227
+    }
+]

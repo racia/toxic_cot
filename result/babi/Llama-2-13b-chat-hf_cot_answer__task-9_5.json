@@ -1,0 +1,43 @@
+[
+    {
+        "question": "Mary is no longer in the bedroom. Daniel moved to the hallway. Is Mary in the bedroom?\n(1) no ",
+        "answer": " If Daniel is in the hallway, then Mary is not in the bedroom. So the answer is: (1) no.</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "Mary is no longer in the bedroom. Daniel moved to the hallway. Sandra moved to the bedroom. Sandra is in the bathroom. Is Daniel in the bathroom?\n(1) no ",
+        "answer": " If Sandra is in the bathroom, and Daniel moved to the hallway, then Daniel is not in the bathroom. So the answer is: (1) no. </s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "Mary is no longer in the bedroom. Daniel moved to the hallway. Sandra moved to the bedroom. Sandra is in the bathroom. Daniel is not in the hallway. Daniel is in the office. Is Sandra in the office?\n(1) no ",
+        "answer": " We know that Daniel is in the office, and Sandra is in the bathroom. We also know that Sandra was in the bedroom before, and Daniel was in the hallway before.",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary is no longer in the bedroom. Daniel moved to the hallway. Sandra moved to the bedroom. Sandra is in the bathroom. Daniel is not in the hallway. Daniel is in the office. Sandra went to the bedroom. John went to the kitchen. Is Sandra in the office?\n(1) no ",
+        "answer": " Based on the information provided:",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary is no longer in the bedroom. Daniel moved to the hallway. Sandra moved to the bedroom. Sandra is in the bathroom. Daniel is not in the hallway. Daniel is in the office. Sandra went to the bedroom. John went to the kitchen. Sandra is not in the bedroom. Mary is no longer in the bathroom. Is Sandra in the bedroom?\n(1) no ",
+        "answer": " Based on the information given:",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "acc": 0.4
+    },
+    {
+        "time": 36.58010334968567
+    }
+]

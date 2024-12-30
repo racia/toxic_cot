@@ -1,0 +1,43 @@
+[
+    {
+        "question": "Lily is a frog. Bernhard is a frog. Bernhard is green. Brian is a lion. Brian is white. Julius is a swan. Julius is green. Lily is green. Greg is a swan. What color is Greg?\n(1) green ",
+        "answer": " Answer: (1) green.</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "Julius is a lion. Lily is a rhino. Bernhard is a swan. Lily is white. Bernhard is green. Greg is a rhino. Greg is gray. Julius is white. Brian is a lion. What color is Brian?\n(1) white ",
+        "answer": " Answer: (1) white</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "Bernhard is a frog. Lily is a frog. Lily is gray. Bernhard is gray. Julius is a lion. Greg is a swan. Julius is yellow. Greg is white. Brian is a swan. What color is Brian?\n(1) white ",
+        "answer": " Answer: (1) white.</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "Julius is a swan. Brian is a frog. Julius is white. Brian is gray. Bernhard is a lion. Lily is a lion. Greg is a swan. Greg is white. Bernhard is white. What color is Lily?\n(1) white ",
+        "answer": " Answer: (1) white</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "Brian is a rhino. Julius is a lion. Bernhard is a lion. Greg is a swan. Brian is gray. Greg is white. Lily is a rhino. Bernhard is yellow. Lily is gray. What color is Julius?\n(1) yellow ",
+        "answer": " Answer: (1) yellow</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "acc": 1.0
+    },
+    {
+        "time": 5.757605648040771
+    }
+]

@@ -1,0 +1,43 @@
+[
+    {
+        "question": "Mary moved to the bathroom. Sandra journeyed to the bedroom. Is Sandra in the hallway?\n(1) yes (2) no ",
+        "answer": " Based on the information given, Sandra journeyed to the bedroom, which is located in the house. The bathroom and the bedroom are both located in the house. So, Sandra is not in the hallway. Therefore, the answer is: (2) no.</s>",
+        "pred": "None",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary moved to the bathroom. Sandra journeyed to the bedroom. Mary went back to the bedroom. Daniel went back to the hallway. Is Daniel in the bathroom?\n(1) yes (2) no ",
+        "answer": " Based on the given information, Daniel went back to the hallway, which means he never went to the bathroom. So the answer is: (2) no.</s>",
+        "pred": "None",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary moved to the bathroom. Sandra journeyed to the bedroom. Mary went back to the bedroom. Daniel went back to the hallway. Sandra went to the kitchen. Daniel went back to the bathroom. Is Daniel in the office?\n(1) yes (2) no ",
+        "answer": " Based on the information given, Daniel went back to the bathroom after he went back to the hallway. This means that he never went to the office. So the answer is: (2) no. </s>",
+        "pred": "None",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary moved to the bathroom. Sandra journeyed to the bedroom. Mary went back to the bedroom. Daniel went back to the hallway. Sandra went to the kitchen. Daniel went back to the bathroom. Daniel picked up the football there. Daniel went to the bedroom. Is Daniel in the bedroom?\n(1) yes (2) no ",
+        "answer": " Based on the information provided, Daniel went back to the bedroom after he picked up the football in the bathroom. Then, Sandra went to the kitchen. So, Daniel is no longer in the bedroom. Therefore, the answer is: (2) no.</s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary moved to the bathroom. Sandra journeyed to the bedroom. Mary went back to the bedroom. Daniel went back to the hallway. Sandra went to the kitchen. Daniel went back to the bathroom. Daniel picked up the football there. Daniel went to the bedroom. John travelled to the office. Sandra went to the garden. Is Daniel in the bedroom?\n(1) yes (2) no ",
+        "answer": " Based on the given information:\n\n* Mary went to the bedroom\n* Daniel went back to the bedroom\n\nTherefore, Daniel is in the bedroom.\n\nSo the answer is: (1) yes.</s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "acc": 0.0
+    },
+    {
+        "time": 32.25476427078247
+    }
+]

@@ -1,0 +1,43 @@
+[
+    {
+        "question": "Bill travelled to the office. Bill picked up the football there. Bill went to the bedroom. Bill gave the football to Fred. What did Bill give to Fred?\n(1) Fred (2) Bill (3) football ",
+        "answer": " The question is asking about what Bill gave to Fred, based on the information given:",
+        "pred": "None",
+        "label": "3",
+        "cor_flag": false
+    },
+    {
+        "question": "Bill travelled to the office. Bill picked up the football there. Bill went to the bedroom. Bill gave the football to Fred. Fred handed the football to Bill. Jeff went back to the office. Who received the football?\n(1) Fred (2) Bill (3) football ",
+        "answer": " Based on the information given, the person who received the football is: (1) Fred.</s>",
+        "pred": "1",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "question": "Bill travelled to the office. Bill picked up the football there. Bill went to the bedroom. Bill gave the football to Fred. Fred handed the football to Bill. Jeff went back to the office. Bill travelled to the office. Bill got the milk there. Who received the football?\n(1) Fred (2) Bill (3) football ",
+        "answer": " Based on the given information, we know that Bill picked up the football at the office and gave it to Fred. Therefore, the answer is: (1) Fred.</s>",
+        "pred": "1",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "question": "Bill travelled to the office. Bill picked up the football there. Bill went to the bedroom. Bill gave the football to Fred. Fred handed the football to Bill. Jeff went back to the office. Bill travelled to the office. Bill got the milk there. Fred travelled to the garden. Fred went to the hallway. Bill journeyed to the bedroom. Jeff moved to the hallway. Jeff journeyed to the bathroom. Bill journeyed to the office. Fred travelled to the bathroom. Mary journeyed to the kitchen. Jeff took the apple there. Jeff gave the apple to Fred. Who did Jeff give the apple to?\n(1) Fred (2) Bill (3) football ",
+        "answer": " Based on the information provided, it seems that Jeff gave the apple to Fred. So the answer is: (1) Fred.</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "Bill travelled to the office. Bill picked up the football there. Bill went to the bedroom. Bill gave the football to Fred. Fred handed the football to Bill. Jeff went back to the office. Bill travelled to the office. Bill got the milk there. Fred travelled to the garden. Fred went to the hallway. Bill journeyed to the bedroom. Jeff moved to the hallway. Jeff journeyed to the bathroom. Bill journeyed to the office. Fred travelled to the bathroom. Mary journeyed to the kitchen. Jeff took the apple there. Jeff gave the apple to Fred. Bill went back to the bathroom. Bill left the milk. Who received the apple?\n(1) Fred (2) Bill (3) football ",
+        "answer": " Let's analyze the given information:",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "acc": 0.2
+    },
+    {
+        "time": 31.311417150497437
+    }
+]

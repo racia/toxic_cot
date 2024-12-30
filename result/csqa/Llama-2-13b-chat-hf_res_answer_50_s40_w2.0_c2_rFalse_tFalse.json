@@ -1,0 +1,355 @@
+[
+    {
+        "question": "A revolving door is convenient for two direction travel, but it also serves as a security measure at a what?\n(1) bank (2) library (3) department store (4) mall (5) new york ",
+        "answer": " A revolving door can be found in a bank, as it helps to prevent people from entering or leaving with an item without being detected. So the answer is: (1) bank.</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "What do people aim to do at work?\n(1) complete job (2) learn from each other (3) kill animals (4) wear hats (5) talk to each other ",
+        "answer": " People aim to complete their job at work. So the answer is: (1) complete job. </s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "Where would you find magazines along side many other printed works?\n(1) doctor (2) bookstore (3) market (4) train station (5) mortuary ",
+        "answer": " Magazines, books, and other printed works can usually be found in bookstores. So the answer is: (2) bookstore.</s>",
+        "pred": "2",
+        "label": "2",
+        "cor_flag": true
+    },
+    {
+        "question": "Where are  you likely to find a hamburger?\n(1) fast food restaurant (2) pizza (3) ground up dead cows (4) mouth (5) cow carcus ",
+        "answer": " Hamburger is a type of food, and we are likely to find it in a place where they sell food. The answer is (1) fast food restaurant.</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "James was looking for a good place to buy farmland.  Where might he look?\n(1) midwest (2) countryside (3) estate (4) farming areas (5) illinois ",
+        "answer": " People usually buy farmland in the countryside, where there are large areas of land for farming. So the answer is: (2) countryside. </s>",
+        "pred": "2",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "What island country is ferret popular?\n(1) own home (2) north carolina (3) great britain (4) hutch (5) outdoors ",
+        "answer": " Ferrets are popular pets in many countries, but the island country known for its love of ferrets is Great Britain. So the answer is: (3) great britain. </s>",
+        "pred": "3",
+        "label": "3",
+        "cor_flag": true
+    },
+    {
+        "question": "In what Spanish speaking North American country can you get a great cup of coffee?\n(1) mildred's coffee shop (2) mexico (3) diner (4) kitchen (5) canteen ",
+        "answer": " Mexico is known for its coffee culture. So the answer is: (2) Mexico. </s>",
+        "pred": "2",
+        "label": "2",
+        "cor_flag": true
+    },
+    {
+        "question": "What do animals do when an enemy is approaching?\n(1) feel pleasure (2) procreate (3) pass water (4) listen to each other (5) sing ",
+        "answer": " When an enemy is approaching, animals may become alert, prepare to defend themselves, or flee. They may also communicate with each other to warn of the danger. So the answer is: (4) listen to each other.  </s>",
+        "pred": "4",
+        "label": "4",
+        "cor_flag": true
+    },
+    {
+        "question": "Reading newspaper one of many ways to practice your what?\n(1) literacy (2) knowing how to read (3) money (4) buying (5) money bank ",
+        "answer": " Reading newspapers is a way to practice reading comprehension and vocabulary, which are important skills for literacy. So the answer is: (1) literacy.</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "What do people typically do while playing guitar?\n(1) cry (2) hear sounds (3) singing (4) arthritis (5) making music ",
+        "answer": " People typically play the guitar to make music. So the answer is: (5) making music.  </s>",
+        "pred": "5",
+        "label": "3",
+        "cor_flag": false
+    },
+    {
+        "question": "What would vinyl be an odd thing to replace?\n(1) pants (2) record albums (3) record store (4) cheese (5) wallpaper ",
+        "answer": " Vinyl records are a physical media to store music. So, the record store would be the oddest thing to replace with vinyl. The other options are all things that are not related to music or records. So the answer is: (3) record store. </s>",
+        "pred": "3",
+        "label": "5",
+        "cor_flag": false
+    },
+    {
+        "question": "If you want harmony, what is something you should try to do with the world?\n(1) take time (2) make noise (3) make war (4) make peace (5) make haste ",
+        "answer": " If we want harmony, we should make peace. So the answer is: (4) make peace. </s>",
+        "pred": "4",
+        "label": "4",
+        "cor_flag": true
+    },
+    {
+        "question": "Where does a heifer's master live?\n(1) farm house (2) barnyard (3) stockyard (4) slaughter house (5) eat cake ",
+        "answer": " Heifer is a young female cow. Cows are usually raised in a farm, so the master of the heifer may live in the farm house. So the answer is: (1) farm house. </s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "Aside from water and nourishment what does your dog need?\n(1) bone (2) charm (3) petted (4) lots of attention (5) walked ",
+        "answer": " Aside from water and nourishment, dogs need exercise. They need to be walked. So the answer is: (5) walked.</s>",
+        "pred": "5",
+        "label": "4",
+        "cor_flag": false
+    },
+    {
+        "question": "Janet was watching the film because she liked what?\n(1) erection (2) laughter (3) being entertained (4) fear (5) bordem ",
+        "answer": " People usually watch films to be entertained. So the answer is: (3) being entertained. </s>",
+        "pred": "3",
+        "label": "3",
+        "cor_flag": true
+    },
+    {
+        "question": "What are you waiting alongside with when you're in a reception area?\n(1) motel (2) chair (3) hospital (4) people (5) hotels ",
+        "answer": " When we are in a reception area, we are usually waiting alongside with other people. So the answer is: (4) people.  </s>",
+        "pred": "4",
+        "label": "4",
+        "cor_flag": true
+    },
+    {
+        "question": "When drinking booze what can you do to stay busy?\n(1) reach tentative agreement (2) stay in bed (3) stop bicycle (4) examine thing (5) suicide ",
+        "answer": " Drinking booze can impair our judgment and make us less productive. It is not recommended to drink and do things that requires our full attention, such as driving, operating heavy machinery, or making important decisions. Therefore, the answer is: (2) stay in bed. </s>",
+        "pred": "2",
+        "label": "4",
+        "cor_flag": false
+    },
+    {
+        "question": "A fencing thrust with a sharp sword towards a person would result in what?\n(1) injury (2) small cuts (3) fever (4) competition (5) puncture wound ",
+        "answer": " If a fencing thrust with a sharp sword towards a person, the result will be a (5) puncture wound. </s>",
+        "pred": "5",
+        "label": "5",
+        "cor_flag": true
+    },
+    {
+        "question": "Unlike a spider and his many sight seers, people only have what?\n(1) tongues (2) names (3) brains (4) feelings (5) two eyes ",
+        "answer": " People only have two eyes, unlike a spider that has many sight seers. So the answer is: (5) two eyes.  </s>",
+        "pred": "5",
+        "label": "5",
+        "cor_flag": true
+    },
+    {
+        "question": "Where do adults use glue sticks?\n(1) classroom (2) desk drawer (3) at school (4) office (5) kitchen drawer ",
+        "answer": " Adults may use glue sticks in the office. They may use glue sticks to glue papers, documents, or other office materials. So the answer is: (4) office.  </s>",
+        "pred": "4",
+        "label": "4",
+        "cor_flag": true
+    },
+    {
+        "question": "What could go on top of wood?\n(1) lumberyard (2) synagogue (3) floor (4) carpet (5) hardware store ",
+        "answer": " Wood is a building material. Many things can be built on top of wood, like houses, furnitures, and so on. From the options, carpet is not something that can go on top of wood. Hardware store sells materials for building, but not the final product. Therefore, the answer is: (3) floor.</s>",
+        "pred": "3",
+        "label": "4",
+        "cor_flag": false
+    },
+    {
+        "question": "The artist was sitting quietly pondering, then suddenly he began to paint when what struck him?\n(1) sadness (2) anxiety (3) inspiration (4) discomfort (5) insights ",
+        "answer": " Suddenly an idea or inspiration strike the artist, and he began to paint. So the answer is: (3) inspiration. </s>",
+        "pred": "3",
+        "label": "3",
+        "cor_flag": true
+    },
+    {
+        "question": "Though the thin film seemed fragile, for it's intended purpose it was actually nearly what?\n(1) indestructible (2) durable (3) undestroyable (4) indestructible (5) unbreakable ",
+        "answer": " Though the thin film may seem fragile, it is actually nearly indestructible. So the answer is: (1) indestructible.</s>",
+        "pred": "1",
+        "label": "4",
+        "cor_flag": false
+    },
+    {
+        "question": "Where could you find a toilet that only friends can use?\n(1) rest area (2) school (3) stadium (4) apartment (5) hospital ",
+        "answer": " Toilets are usually found in public places, and people can use them. However, the question is asking about a toilet that only friends can use. Since there is no such thing, the answer is: (5) none.</s>",
+        "pred": "5",
+        "label": "4",
+        "cor_flag": false
+    },
+    {
+        "question": "What is someone who isn't clever, bright, or competent called?\n(1) clumsy (2) ineffectual (3) dull (4) clumsy (5) stupid ",
+        "answer": " If someone is not clever, bright, or competent, they are called dull. Therefore, the answer is: (3) dull. </s>",
+        "pred": "3",
+        "label": "5",
+        "cor_flag": false
+    },
+    {
+        "question": "When wildlife reproduce we often refer to what comes out as what?\n(1) raise children (2) have children (3) photo copy (4) offspring (5) accidently got pregnant somehow ",
+        "answer": " When wildlife reproduce, they have children. So the answer is: (2) have children. </s>",
+        "pred": "2",
+        "label": "4",
+        "cor_flag": false
+    },
+    {
+        "question": "The weasel was becoming a problem, it kept getting into the chicken eggs kept in the what?\n(1) forrest (2) barn (3) public office (4) out of doors (5) freezer ",
+        "answer": " Since the weasel is getting into the chicken eggs, the eggs are likely kept in a place where the weasel can reach them. The barn is a place where chicken and eggs are often kept. So the answer is: (2) barn.</s>",
+        "pred": "2",
+        "label": "2",
+        "cor_flag": true
+    },
+    {
+        "question": "Blue read material outside of his comfort zone because he wanted to gain what?\n(1) new perspective (2) entertained (3) understanding (4) hunger (5) tired eyes ",
+        "answer": " People usually read materials outside of their comfort zones to gain new perspectives. So the answer is: (1) new perspective. </s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "After he got hired he hoped for success at his what?\n(1) vocation (2) new job (3) michigan (4) working hard (5) manual ",
+        "answer": " The word \"vocation\" means a person's occupation or profession. If someone got hired, they usually hope for success in their job. So the answer is: (1) vocation. </s>",
+        "pred": "1",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "question": "Committing perjury is a serious what?\n(1) indictment (2) crime (3) violence (4) lie (5) go to jail ",
+        "answer": " Perjury is a serious crime, and it is illegal to give false testimony in a court of law. So the answer is: (2) crime. </s>",
+        "pred": "2",
+        "label": "2",
+        "cor_flag": true
+    },
+    {
+        "question": "If you are prone to postpone work what will you have to do in order to finish on time?\n(1) eat (2) hasten (3) antedate (4) bring forward (5) advance ",
+        "answer": " If someone is prone to postpone work, it means they tend to delay their work. In order to finish on time, they will have to do the opposite of postponing. The word that best fits the blank is: (4) bring forward.</s>",
+        "pred": "4",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "question": "James wanted to find an old underground map from the 50s.  Where might he look for one?\n(1) library (2) subway station (3) county engineer's office (4) super market (5) home ",
+        "answer": " Old underground maps from the 50s are likely to be stored in the archives of the county or city. The county engineer's office would have records of the underground infrastructure of the county. So the answer is: (3) county engineer's office.</s>",
+        "pred": "3",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Sean was in a rush to get home, but the light turned yellow and he was forced to do what?\n(1) take time (2) dawdle (3) go slowly (4) ocean (5) slow down ",
+        "answer": " When the light turn yellow, it means the traffic light is about to turn red. So, to avoid getting a ticket, Sean has to slow down. The answer is: (5) slow down.  </s>",
+        "pred": "5",
+        "label": "5",
+        "cor_flag": true
+    },
+    {
+        "question": "Where would a person be doing when having to wait their turn?\n(1) have patience (2) get in line (3) sing (4) stand in line (5) turn left ",
+        "answer": " When a person has to wait their turn, they are usually waiting in line. So the answer is: (2) get in line.  </s>",
+        "pred": "2",
+        "label": "4",
+        "cor_flag": false
+    },
+    {
+        "question": "She was always helping at the senior center, it brought her what?\n(1) satisfaction (2) heart (3) feel better (4) pay (5) happiness ",
+        "answer": " When someone is helping others, they may feel a sense of satisfaction. So the answer is: (1) satisfaction. </s>",
+        "pred": "1",
+        "label": "5",
+        "cor_flag": false
+    },
+    {
+        "question": "The lock kept the steering wheel from moving, but the thief still took his chances and began to work on the what?\n(1) keep cloesd (2) train (3) ignition switch (4) drawer (5) firearm ",
+        "answer": " The lock on the steering wheel prevented the thief from turning the wheel. If the thief still tried to steal the car, he would have to work on the ignition switch. So the answer is: (3) ignition switch.  </s>",
+        "pred": "3",
+        "label": "3",
+        "cor_flag": true
+    },
+    {
+        "question": "Who is a police officer likely to work for?\n(1) beat (2) direct traffic (3) city (4) street (5) president ",
+        "answer": " Police officers usually work for the city. So the answer is: (3) city.</s>",
+        "pred": "3",
+        "label": "3",
+        "cor_flag": true
+    },
+    {
+        "question": "If you have leftover cake, where would you put it?\n(1) quandry (2) refrigerator (3) oven (4) night stand (5) bakery ",
+        "answer": " If we have leftover cake, we usually put it in the refrigerator. The refrigerator is a place to store food that we do not eat right away. So the answer is: (2) refrigerator. </s>",
+        "pred": "2",
+        "label": "2",
+        "cor_flag": true
+    },
+    {
+        "question": "A human wants to submerge himself in water, what should he use?\n(1) whirlpool bath (2) coffee cup (3) cup (4) soft drink (5) puddle ",
+        "answer": " To submerge oneself in water, a person needs a container that can hold a large amount of water. A whirlpool bath is such a device, and it is used for relaxation and therapeutic purposes. So the answer is: (1) whirlpool bath.</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "Where is a doormat likely to be in front of?\n(1) facade (2) front door (3) doorway (4) entrance porch (5) hallway ",
+        "answer": " A doormat is likely to be in front of the entrance of a house, which is the front door. So the answer is: (2) front door. </s>",
+        "pred": "2",
+        "label": "2",
+        "cor_flag": true
+    },
+    {
+        "question": "Bob the lizard lives in a warm place with lots of water.  Where does he probably live?\n(1) rock (2) tropical rainforest (3) jazz club (4) new mexico (5) rocky places ",
+        "answer": " Lizards usually live in warm and dry places, and they need a lot of sunlight. New Mexico is a dry place with warm temperature, so Bob the lizard probably lives in New Mexico. So the answer is: (4) New Mexico.</s>",
+        "pred": "4",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "question": "August needed  money because he was afraid that he'd be kicked out of his house.  What did he need money to do?\n(1) control people (2) pay bills (3) hurt people (4) buy food (5) get things ",
+        "answer": " If August needed money to avoid getting kicked out of his house, it means he needed money to pay his bills. So the answer is: (2) pay bills. </s>",
+        "pred": "2",
+        "label": "2",
+        "cor_flag": true
+    },
+    {
+        "question": "He needed more information to fix it, so he consulted the what?\n(1) chickens (2) google (3) newspaper (4) online (5) manual ",
+        "answer": " If someone needs more information to fix something, they usually consult a manual or guide. Manuals are written instructions that provide information on how to perform a specific task. So the answer is: (5) manual. </s>",
+        "pred": "5",
+        "label": "5",
+        "cor_flag": true
+    },
+    {
+        "question": "Where can you put a picture frame when it's not hung vertically?\n(1) art show (2) wall (3) newspaper (4) car (5) table ",
+        "answer": " We can put a picture frame on a table, so the answer is: (5) table. </s>",
+        "pred": "5",
+        "label": "5",
+        "cor_flag": true
+    },
+    {
+        "question": "James knew that he shouldn't have been buying beer for minors.  He didn't even get paid for it.  Why was this bad?\n(1) lose money (2) fun (3) have no money (4) broken law (5) relaxation ",
+        "answer": " If James bought beer for minors, it is illegal. In that case, he may be arrested and fined. So the answer is: (4) broken law. </s>",
+        "pred": "4",
+        "label": "4",
+        "cor_flag": true
+    },
+    {
+        "question": "What is the result of applying for  job?\n(1) anxiety and fear (2) increased workload (3) praise (4) less sleep (5) being employed ",
+        "answer": " When someone apply for a job, they may feel anxious and fear of rejection or the result may be nothing. However, if they are employed, it will be a positive result. So the answer is: (5) being employed. </s>",
+        "pred": "5",
+        "label": "5",
+        "cor_flag": true
+    },
+    {
+        "question": "What must someone do before they shop?\n(1) get money (2) have money (3) bring cash (4) go to market (5) bring cash ",
+        "answer": " Before someone can shop, they must have money to buy things. In that case, they must have money. So the answer is: (2) have money. </s>",
+        "pred": "2",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Because John was first violin, he had to bring something important to work ever day. What did he need to bring to work?\n(1) music store (2) obesity (3) symphony orchestra (4) ochestra (5) violin case ",
+        "answer": " As the first violin, John need to bring his violin to work every day. So the answer is: (5) violin case.</s>",
+        "pred": "5",
+        "label": "5",
+        "cor_flag": true
+    },
+    {
+        "question": "What is a place that usually does not have an elevator and that sometimes has a telephone book?\n(1) at hotel (2) kitchen (3) library (4) telephone booth (5) house ",
+        "answer": " A place that does not have an elevator is usually a building with multiple floors, so the people can go up or down the stairs. The place that sometimes has a telephone book is a telephone booth. So the answer is: (4) telephone booth. </s>",
+        "pred": "4",
+        "label": "5",
+        "cor_flag": false
+    },
+    {
+        "question": "Who is likely to be excited about a crab?\n(1) fish market (2) pet shop (3) fishmongers (4) intertidal zone (5) obesity ",
+        "answer": " Crabs are usually sold in seafood markets. So the people who are likely to be excited about a crab are the one who work in the fish market. So the answer is: (1) fish market.</s>",
+        "pred": "1",
+        "label": "3",
+        "cor_flag": false
+    },
+    {
+        "acc": 0.62
+    }
+]

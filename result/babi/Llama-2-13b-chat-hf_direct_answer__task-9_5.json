@@ -1,0 +1,43 @@
+[
+    {
+        "question": "Mary is no longer in the bedroom. Daniel moved to the hallway. Is Mary in the bedroom?\n(1) no ",
+        "answer": " Answer: (1) no</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "Mary is no longer in the bedroom. Daniel moved to the hallway. Sandra moved to the bedroom. Sandra is in the bathroom. Is Daniel in the bathroom?\n(1) no ",
+        "answer": " Answer: (1) no.</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "Mary is no longer in the bedroom. Daniel moved to the hallway. Sandra moved to the bedroom. Sandra is in the bathroom. Daniel is not in the hallway. Daniel is in the office. Is Sandra in the office?\n(1) no ",
+        "answer": " Answer: (1) no.</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "Mary is no longer in the bedroom. Daniel moved to the hallway. Sandra moved to the bedroom. Sandra is in the bathroom. Daniel is not in the hallway. Daniel is in the office. Sandra went to the bedroom. John went to the kitchen. Is Sandra in the office?\n(1) no ",
+        "answer": " Answer: (1) no.</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "question": "Mary is no longer in the bedroom. Daniel moved to the hallway. Sandra moved to the bedroom. Sandra is in the bathroom. Daniel is not in the hallway. Daniel is in the office. Sandra went to the bedroom. John went to the kitchen. Sandra is not in the bedroom. Mary is no longer in the bathroom. Is Sandra in the bedroom?\n(1) no ",
+        "answer": " Answer: (1) no.</s>",
+        "pred": "1",
+        "label": "1",
+        "cor_flag": true
+    },
+    {
+        "acc": 1.0
+    },
+    {
+        "time": 5.94404673576355
+    }
+]

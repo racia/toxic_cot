@@ -1,0 +1,43 @@
+[
+    {
+        "question": "Mary and Daniel travelled to the bathroom. John and Daniel travelled to the office. Where is Daniel?\n(1) bathroom (2) bedroom (3) garden (4) office ",
+        "answer": " Answer: (4) office.  </s>",
+        "pred": "4",
+        "label": "4",
+        "cor_flag": true
+    },
+    {
+        "question": "Mary and Daniel travelled to the bathroom. John and Daniel travelled to the office. Sandra and Daniel moved to the kitchen. Sandra and John moved to the garden. Where is Sandra?\n(1) bathroom (2) bedroom (3) garden (4) office ",
+        "answer": " Answer: (3) garden</s>",
+        "pred": "3",
+        "label": "3",
+        "cor_flag": true
+    },
+    {
+        "question": "Mary and Daniel travelled to the bathroom. John and Daniel travelled to the office. Sandra and Daniel moved to the kitchen. Sandra and John moved to the garden. Mary and Sandra went to the bedroom. Mary and Daniel moved to the garden. Where is Sandra?\n(1) bathroom (2) bedroom (3) garden (4) office ",
+        "answer": " Answer: (3) garden.</s>",
+        "pred": "3",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary and Daniel travelled to the bathroom. John and Daniel travelled to the office. Sandra and Daniel moved to the kitchen. Sandra and John moved to the garden. Mary and Sandra went to the bedroom. Mary and Daniel moved to the garden. Daniel and Mary went to the bathroom. Sandra and Mary travelled to the garden. Where is Daniel?\n(1) bathroom (2) bedroom (3) garden (4) office ",
+        "answer": " Answer: (4) office.</s>",
+        "pred": "4",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary and Daniel travelled to the bathroom. John and Daniel travelled to the office. Sandra and Daniel moved to the kitchen. Sandra and John moved to the garden. Mary and Sandra went to the bedroom. Mary and Daniel moved to the garden. Daniel and Mary went to the bathroom. Sandra and Mary travelled to the garden. John and Sandra travelled to the hallway. John and Sandra went back to the office. Where is John?\n(1) bathroom (2) bedroom (3) garden (4) office ",
+        "answer": " Answer: (4) office.</s>",
+        "pred": "4",
+        "label": "4",
+        "cor_flag": true
+    },
+    {
+        "acc": 0.6
+    },
+    {
+        "time": 6.0913622856140135
+    }
+]

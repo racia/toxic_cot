@@ -1,0 +1,43 @@
+[
+    {
+        "question": "Mary moved to the bathroom. Sandra journeyed to the bedroom. John went to the kitchen. Mary took the football there. How many objects is Mary carrying?\n(1) one (2) none ",
+        "answer": " Mary moved to the bathroom, so she is not carrying any object. So the answer is: (2) none.</s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary moved to the bathroom. Sandra journeyed to the bedroom. John went to the kitchen. Mary took the football there. Sandra went back to the office. Daniel went back to the office. How many objects is Mary carrying?\n(1) one (2) none ",
+        "answer": " Mary carried the football. So the answer is: (1) one.</s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary moved to the bathroom. Sandra journeyed to the bedroom. John went to the kitchen. Mary took the football there. Sandra went back to the office. Daniel went back to the office. John moved to the bedroom. Sandra moved to the garden. How many objects is Mary carrying?\n(1) one (2) none ",
+        "answer": " Mary took the football to the bathroom, so she is carrying one object, the football. So the answer is: (1) one.</s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary moved to the bathroom. Sandra journeyed to the bedroom. John went to the kitchen. Mary took the football there. Sandra went back to the office. Daniel went back to the office. John moved to the bedroom. Sandra moved to the garden. Mary travelled to the garden. Mary went to the hallway. Sandra journeyed to the bedroom. Mary dropped the football. How many objects is Mary carrying?\n(1) one (2) none ",
+        "answer": " Based on the given information, Mary is carrying one object, which is the football. So the answer is: (1) one.  </s>",
+        "pred": "None",
+        "label": "2",
+        "cor_flag": false
+    },
+    {
+        "question": "Mary moved to the bathroom. Sandra journeyed to the bedroom. John went to the kitchen. Mary took the football there. Sandra went back to the office. Daniel went back to the office. John moved to the bedroom. Sandra moved to the garden. Mary travelled to the garden. Mary went to the hallway. Sandra journeyed to the bedroom. Mary dropped the football. Mary got the football there. Daniel travelled to the garden. How many objects is Mary carrying?\n(1) one (2) none ",
+        "answer": " Based on the information given, Mary is carrying one object, which is the football.</s>",
+        "pred": "None",
+        "label": "1",
+        "cor_flag": false
+    },
+    {
+        "acc": 0.0
+    },
+    {
+        "time": 18.379171228408815
+    }
+]
