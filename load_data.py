@@ -212,6 +212,7 @@ class CoTLoader():
         for step in steps:
             if 'answer is' in step:
                 continue
+            #step = step.lstrip("So the answer is: ")
             cots.append(step)
         return cots
     
@@ -243,11 +244,8 @@ class CoTLoader():
             # Wr dir → cor cot, cor dir → wr cot
             for i, data in enumerate(base_data):
                 question_set.append(data['question'])
-                print("Base: ,", i, data)
             for i, data in enumerate(cot_data):
-                print(i, data)
-                if data['question'] in question_set:
-                    print("##########HERE############")             
+                if data['question'] in question_set:           
                     index.append(full_cot_data.index(data))
             index = index[:cnt]
             # Get indices of cor → wr and wr → cor data
@@ -258,11 +256,11 @@ class CoTLoader():
             question = full_cot_data[idx]['question']
             cot = full_cot_data[idx]['answer']
             cots = self.split_cot(cot)
-            #print(cots)
             pred = full_cot_data[idx]['pred']
             label = full_cot_data[idx]['label']
             msg = {'question':question, 'answer':cot, 'steps':cots, 'pred':pred, 'label':label}
             data.append(msg)       
+        assert len(data) >= 1
         return data, index
     
     
