@@ -27,7 +27,7 @@ class Model():
         self.is_neox = model_name.startswith('gpt-neox')
         self.is_gptneo = model_name.startswith('gpt-neo')
         self.is_opt = model_name.startswith('opt')
-        self.is_llama = model_name.startswith('Llama') 
+        self.is_llama = model_name.startswith('Meta') 
         self.is_flan = model_name.startswith('flan-t5')
         self.is_pythia = model_name.startswith('pythia')
 
@@ -171,7 +171,6 @@ if __name__ == '__main__':
     for key in inter_dic.keys():
         reps[key] = {k:[] for k in range(model.num_layers)}
     for msg in tqdm(data):
-        print(msg["steps"])
         if model_name.startswith('Baichuan'):
             inter_data = InterventionData(msg, tokenizer, cot_prompter, model.model)
         else:

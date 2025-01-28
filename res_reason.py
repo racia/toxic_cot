@@ -92,10 +92,12 @@ class ResReason():
         kwargs['do_sample'] = False
         kwargs['res_decoding'] = True
         input = self.prompter.wrap_input(question, icl_cnt=5)
-        if model_name.startswith('Llama'):
+        if model_name.startswith('Meta'):
             key_position = self.llama_get_key_position(question)
             kwargs['key_position'] = key_position
-            # config = GenerationConfig.from_pretrained(self.model_path, **kwargs)
+            # Get pretraining GenerationConfig
+            config = GenerationConfig.from_pretrained(self.model_path, **kwargs) 
+
             result, pred = llama_generate(self.model, kwargs, self.tokenizer, input, 'cot_answer')  
         elif model_name.startswith('Mistral'):
             key_position = self.mistral_get_key_position(question)
@@ -225,7 +227,7 @@ class ResReason():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model', type=str, default='Llama-2-13b-chat-hf')
+    parser.add_argument('--model', type=str, default='Meta-Llama-3-8B-Instruct')
     parser.add_argument('--datalength', type=int, default=5) #2000
     parser.add_argument('--dataset', type=str, default='babi')
     parser.add_argument('--scale', type=int, default=40)

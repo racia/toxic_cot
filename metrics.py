@@ -60,8 +60,8 @@ def draw_heat(index, scores, x, y, path, mine=False, exp=None, vmax=None):
         x_ticks, y_ticks = [i+0.5 for i in x_ticks], [i+0.5 for i in y_ticks]
         plt.ylabel('Answer tokens', fontdict={'size':10})
         plt.xlabel('Question tokens', fontdict={'size':10})
-        plt.yticks(ticks=y_ticks, labels=y, fontsize=5, rotation=30) # Cot
-        plt.xticks(ticks=x_ticks, labels=index, fontsize=5, rotation=30) # Options
+        plt.yticks(ticks=y_ticks, labels=y, fontsize=5, rotation=0) # Cot
+        plt.xticks(ticks=x_ticks, labels=index, fontsize=5, rotation=90) # Options
         plt.subplots_adjust(left=0.15, right=0.99, top=0.98, bottom=0.15)
         cbar = ax.collections[0].colorbar
         cbar.ax.tick_params(labelsize=5)

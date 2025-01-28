@@ -4,7 +4,7 @@ class Prompter():
     def __init__(self, dataset, task) -> None:
         self.dataset = dataset
         self.task = task
-        self.name = None 
+        self.name = None
         pass
     
     def load_sys_instruction(self):
@@ -26,7 +26,7 @@ class Prompter():
             example_path = f'./prompts/{self.task}/{self.dataset}.json'
             with open(example_path, 'r') as f:
                 examples = json.load(f)
-            if self.name in ['Baichuan','Mistral']:
+            if self.name in ['Baichuan','Llama', 'Mistral']:
                 example_seq = []
             else:
                 example_seq = ""
@@ -41,18 +41,17 @@ class Prompter():
                 if cnt >= icl_cnt:
                     break
         return example_seq
-                
+
         
     def wrap_input(self, msg, icl_cnt):
-        sys_msg = self.load_sys_instruction()
+        sys_msg = self.load_sys_instruction() 
         example_msg = self.load_examples(icl_cnt=icl_cnt)
         user_msg = self.wrap_msg(msg, 'user')
-        if self.name == 'Mistral':
+        if self.name == 'Llama': # Mistral
             example_msg[0]['content'] = sys_msg[0]['content'] + example_msg[0]['content']
-            return example_msg + user_msg
+            return example_msg + user_msg # Only take sys prompt with example and user msg
         else:
-            return sys_msg + example_msg + user_msg
-                
+            return sys_msg + example_msg + user_msg  
                 
 class LlamaPrompter(Prompter):
     def __init__(self, dataset, task) -> None:
@@ -64,12 +63,13 @@ class LlamaPrompter(Prompter):
     
     def wrap_msg(self, msg, role):
         if role == 'sys':
-            msg = self.sys_prompt.format(msg) 
+            msg = [{"role":"user", "content": msg}]
         elif role == 'user':
-            msg = self.user_prompt.format(msg)
+            msg = [{"role":"user", "content": msg}]
         else:
-            msg = self.model_prompt.format(msg)
+            msg = [{"role":"assistant", "content": msg}]
         return msg
+
 
 class VicunaPrompter(Prompter):
     def __init__(self, dataset, task) -> None:

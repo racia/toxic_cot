@@ -1,0 +1,24 @@
+apple
+milk
+football
+kitchen
+hallway
+garden
+bathroom
+bedroom
+object
+wolf
+mouse
+cat
+sheep
+triangle
+square
+rectangle
+sphere
+box
+box of chocolates
+suitcase
+chocolate
+chest
+container
+office

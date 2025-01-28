@@ -33,7 +33,7 @@ exp = args.exp
 avg = args.avg
 ## Path 
 model_path = f'./model/{model_name}'
-if model_name.startswith('Llama'):
+if model_name.startswith('Meta'):
     cot_file_path  = f'./result/{dataset}/{model_name}_cot_answer__task-11_5.json' #dev_1000
     base_file_path = f'./result/{dataset}/{model_name}_direct_answer__task-11_5.json' #dev_1000
     full_cot_path = f'./result/{dataset}/{model_name}_generate_cot__task-11_5.json' #dev_1000
@@ -69,7 +69,7 @@ cot_prompter = get_prompter(model_name=model_name, dataset=dataset, task='cot_an
 
 ## Load Data
 index = None 
-if model_name.startswith('Llama'):
+if model_name.startswith('Meta'):
     if mode == 'C2W':
         if dataset == 'csqa':
             # index = [41,49,158,161,174,219,244,276,283,286,297,386,394,402,413,424,431,441,443,457][:cnt]

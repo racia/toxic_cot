@@ -42,9 +42,9 @@ class LLMReason():
                 torch_dtype=torch.bfloat16,
                 trust_remote_code=True)
             self.model.eval()
-        elif self.model_name.startswith('Llama') or self.model_name.startswith('Vicuna') or self.model_name.startswith('Mistral'):
-            self.model = AutoModelForCausalLM.from_pretrained(self.model_path, torch_dtype=torch.float16, trust_remote_code=True, device_map='auto')
-            self.tokenizer = AutoTokenizer.from_pretrained(self.model_path, trust_remote_code=True)  
+        elif self.model_name.startswith('Meta') or self.model_name.startswith('Vicuna') or self.model_name.startswith('Mistral'):
+            self.model = AutoModelForCausalLM.from_pretrained(self.model_path, torch_dtype=torch.bfloat16, trust_remote_code=True, device_map='auto')
+            self.tokenizer = AutoTokenizer.from_pretrained(self.model_path, trust_remote_code=True, padding_side="left")  
             self.model.eval()
     
 
@@ -82,6 +82,7 @@ class LLMReason():
             path = f'./{self.task}_{self.dataset}_documents.json'
             with open(path, 'r') as f:
                 documents = json.load(f)
+        self.prompter = get_prompter(self.model_name, self.dataset, self.task)
         for data in tqdm(dataloader):
             start = time.time()
             question = data['question']
@@ -115,7 +116,6 @@ class LLMReason():
                 self.prompter = get_prompter(self.model_name, self.dataset, 'cons_answer')
                 result, pred = self.model_generate(question)
             elif self.task == 'direct_answer':
-                self.prompter = get_prompter(self.model_name, self.dataset, 'direct_answer')
                 result, pred = self.model_generate(question)
             elif self.task == 'dpr':   
                 if self.dataset in ['wino','piqa']:
@@ -134,7 +134,6 @@ class LLMReason():
                 self.prompter = get_prompter(self.model_name, self.dataset, 'cot_answer')
                 result, pred = self.model_generate(question)
             else:   #cot_answer
-                self.prompter = get_prompter(self.model_name, self.dataset, 'cot_answer')
                 result, pred = self.model_generate(question)
             if self.dataset != 'gsm8k':
                 match = re.findall(r'[1-6]\)',pred)
@@ -170,10 +169,10 @@ class LLMReason():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model', type=str, default='Llama-2-13b-chat-hf')
+    parser.add_argument('--model', type=str, default='Meta-Llama-3-8B-Instruct')
     parser.add_argument('--datalength', type=int, default=5) #2
     parser.add_argument('--dataset', type=str, default='babi') #csqa #siqa
-    parser.add_argument('--task', type=str, default='generate_cot')
+    parser.add_argument('--task', type=str, default='cot_answer')
     parser.add_argument('--icl', type=int, default=5)
     parser.add_argument('--shuffle', action='store_true')
     args = parser.parse_args()
@@ -190,10 +189,10 @@ if __name__ == "__main__":
     #dataloader = DataLoader(dataset=dataset, data_length=datalength, shuffle=shuffle)
     #llm_reason.model_call(dataloader, result_path)
     
-    with ThreadPoolExecutor(max_workers=20) as e:
+    with ThreadPoolExecutor(max_workers=8) as e:
         print("Jobs starting…")
         futures = []
-        for i in range(1, 21):
+        for i in [2,6,10,12,13,17,18,19]:
             print(f"Loading data…")
             dataloader = DataLoader(dataset=dataset, data_length=datalength, shuffle=shuffle, task_id=str(i))
             print(f"Submitting job {i}")

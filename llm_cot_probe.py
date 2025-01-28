@@ -11,6 +11,7 @@ import random
 import torch.nn.functional as F
 from tqdm import tqdm
 from transformers import AutoTokenizer, AutoModelForCausalLM, AutoConfig, AutoModelForSeq2SeqLM
+from transformers.generation.utils import GenerationConfig
 from utils import get_prompter, build_chat_input
 from load_data import DataLoader, CoTLoader
 from metrics import draw_plot, draw_heat, draw_line_plot, draw_attr_bar
@@ -36,7 +37,14 @@ class LlmCotProbe():
         self.model = AutoModelForCausalLM.from_pretrained(self.model_path, torch_dtype=torch.float16, trust_remote_code=True, device_map='auto')
         self.device_map = self.model.hf_device_map
         self.model.eval()
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_path, trust_remote_code=True)  
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_path, trust_remote_code=True)
+        special_tokens_dict = {"additional_special_tokens" : ["user", "assistant"]}
+        self.tokenizer.add_special_tokens(special_tokens_dict)
+        print(self.tokenizer.special_tokens_map, self.tokenizer.encode("assistant"), self.tokenizer.convert_ids_to_tokens(128000))
+        #user_token_id = self.tokenizer.convert_tokens_to_ids("user")
+        #assistant_token_id = self.tokenizer.convert_tokens_to_ids("assistant")  
+        self.config = GenerationConfig.from_pretrained(self.model_path, max_new_tokens=50, do_sample=False, pad_token_id=self.tokenizer.eos_token_id)
+        self.model.resize_token_embeddings(len(self.tokenizer))
         self.cot_prompter = get_prompter(model_name=self.model_name, dataset=dataset, task='cot_answer')
         self.base_prompter = get_prompter(model_name=self.model_name, dataset=dataset, task='direct_answer')
 
@@ -69,15 +77,20 @@ class Probe(LlmCotProbe):
             question_len = len(self.tokenizer(wrap_question, return_tensors="pt").input_ids[0])
         else:
             if self.model_name[:5] == 'Llama':
-                question_len = len(self.cot_prompter.user_prompt.format(question))
-                prompt = self.cot_prompter.wrap_input(question, icl_cnt=5)[:-question_len]
-                wrap_question = self.cot_prompter.wrap_input(question, icl_cnt=5)
-                if self.loss_type == 'cot': #With answer already provided
-                    input_text = wrap_question + cot 
+                question_len = len(self.tokenizer(question, return_tensors="pt").input_ids[0])
+                question_msg = self.cot_prompter.wrap_input(question, icl_cnt=5)
+                print("QQQQQQQQQ: ", question_msg)
+                question_ids = build_chat_input(self.model, self.tokenizer, question_msg)
+                prompt_len = len(question_ids[0]) - question_len - 1
+                question_len = len(question_ids[0])
+                if self.loss_type == 'cot':
+                    assistant_msg = [{'role':'assistant', 'content':f'{cot}'}]
                 else:
-                    input_text = wrap_question + cot + f' So the answer is: ({label})' 
-                input_ids = self.tokenizer(input_text, return_tensors="pt").input_ids
-                
+                    assistant_msg = [{'role':'assistant', 'content':f'{cot} So the answer is: ({label})'}]
+                input_msg = question_msg + assistant_msg 
+
+                inputs = self.tokenizer.apply_chat_template(input, return_tensors="pt")
+                input_ids = inputs.to(self.model.device)                
                 prompt_len = len(self.tokenizer(prompt, return_tensors="pt").input_ids[0]) - 1
                 question_len = len(self.tokenizer(wrap_question, return_tensors="pt").input_ids[0])
                 stem = '\n'.join(wrap_question.split('\n')[:-1])
@@ -180,12 +193,16 @@ class Probe(LlmCotProbe):
             grad_int += k * grad
         scores = 1 / steps * value * grad_int
         return torch.abs(scores) 
+       
+  
+    def check_tok(self, dist_toks, tok):
+        return tok in dist_toks
+
     
-    
-    def cal_attn(self, question, label, cot, layers, result_path):  
-        if self.model_name.startswith('Llama'):
+    def cal_attn(self, question, label, cot, layers, result_path, dist_toks):  
+        if model_name.startswith('Llama'):
             question_len = len(self.cot_prompter.user_prompt.format(question))
-            prompt = self.cot_prompter.wrap_input(question, icl_cnt=5)[:-question_len] # w/o question
+            prompt = self.cot_prompter.wrap_input(question, icl_cnt=5)[:-question_len]
             wrap_question = self.cot_prompter.wrap_input(question, icl_cnt=5)
             input_text = wrap_question + cot + f' So the answer is: ({label})'
             input_ids = self.tokenizer(input_text, return_tensors="pt").input_ids.to(self.model.device)
@@ -193,9 +210,8 @@ class Probe(LlmCotProbe):
             stem = '\n'.join(wrap_question.split('\n')[:-1])
             stem_len = len(self.tokenizer(stem, return_tensors="pt").input_ids[0])
             question_len = len(self.tokenizer(wrap_question, return_tensors="pt").input_ids[0])
-            #cot_len = len(self.tokenizer(wrap_question + cot, return_tensors="pt").input_ids[0])
-            cot_len = len(self.tokenizer(input_text, return_tensors="pt").input_ids[0])
-        else:
+            cot_len = len(self.tokenizer(wrap_question + cot, return_tensors="pt").input_ids[0])
+        elif model_name.startswith('Meta'): # Meta
             question_len = len(self.tokenizer(question, return_tensors="pt").input_ids[0])
             question_msg = self.cot_prompter.wrap_input(question, icl_cnt=5)
             question_ids = build_chat_input(self.model, self.tokenizer, question_msg)
@@ -207,17 +223,21 @@ class Probe(LlmCotProbe):
             stem_len = len(self.tokenizer(question.split('\n')[0],return_tensors="pt").input_ids[0])
             stem_len = prompt_len + stem_len
             cot_msg = question_msg + [{'role':'assistant', 'content':f'{cot}'}]
-            cot_len = len(build_chat_input(self.model, self.tokenizer, cot_msg)[0])
+            cot_len = len(build_chat_input(self.model, self.tokenizer, input_msg)[0]) # Get label answer too
 
         self.model.eval()
+        # Set Generation config with pad_token_id
+        self.model.generation_config = self.config
+
         outputs = self.model(
             input_ids=input_ids.to(self.model.device),
             return_dict=True,
             output_attentions=True,
             output_hidden_states=False,
         )
-        print("CoT length: ", cot_len-prompt_len)
-        print("Question length: ", question_len-prompt_len)
+
+        print("CoT length: ", cot_len-prompt_len) #121
+        print("Question length: ", question_len-prompt_len) #84
         
         input_ids = input_ids[0, prompt_len:].detach().cpu().numpy()
         scores = []
@@ -238,28 +258,24 @@ class Probe(LlmCotProbe):
             top_k_attn_scores = attn_scores[:, top_k_attn_indices] # Take top attended word from options given CoT (41, 10)
             np.sort(top_k_attn_scores) # Sort ascending
 
-            print("Attn scores shape: ", top_k_attn_scores.shape)
+            print("Attn scores shape: ", attn_scores.shape)
             not_att = []
-            for i, cot_tok in enumerate(top_k_attn_scores):
-                for attn, ind in zip(top_k_attn_scores[i], top_k_attn_indices): # Attention for first Cot token
-                    #print(f"Here: {i}", attn, self.tokenizer.decode(input_ids[ind]))#, input_ids[question_len-prompt_len+i])
-                    tok = self.tokenizer.decode(input_ids[ind])
-                    if re.match("([^A-Za-z\d]+)|INST", tok): #Remove unneccessary tokens
+            for i, cot_tok in enumerate(attn_scores):
+                for ind, attn in enumerate(attn_scores[i]): # Attention for first Cot token - top_k_…; attn, ind; 
+                    tok = self.tokenizer.batch_decode(input_ids)[ind] # convert ids to natural text.
+                    tok = tok.strip()
+                    if re.match("([^A-Za-z\d]+)|INST", tok) or not self.check_tok(dist_toks, tok): # Remove unneccessary tokens
                         not_att.append(ind)
             
-            top_k_attn_indices = list(filter(lambda x: x not in not_att, top_k_attn_indices))
+            top_k_attn_indices = list(filter(lambda x: x not in not_att, list(range(attn_scores.shape[1])))) #top_k_attn_indices
 
             top_k_attn_scores = attn_scores[:, top_k_attn_indices]
 
         else:
             attn_scores = attn_scores[:, cot_len-prompt_len:, :stem_len-prompt_len].sum() 
 
-        y_tokens = self.tokenizer.convert_ids_to_tokens(input_ids[question_len-prompt_len:cot_len-prompt_len], skip_special_tokens=False)
-        x_tokens = self.tokenizer.convert_ids_to_tokens(input_ids[top_k_attn_indices], skip_special_tokens=False) # Take options
-        
-        y_tokens = [y.strip("▁") for y in y_tokens]
-        x_tokens = [x.strip("▁") for x in x_tokens]
-        #assert all(["<s> " not in tok for tok in x_tokens])
+        y_tokens = self.tokenizer.batch_decode(input_ids[question_len-prompt_len:cot_len-prompt_len])
+        x_tokens = self.tokenizer.batch_decode(input_ids[top_k_attn_indices]) # Take options
 
         scores.append(attn_scores)
 
@@ -268,7 +284,7 @@ class Probe(LlmCotProbe):
         del outputs
         torch.cuda.empty_cache()
         return top_k_attn_scores, x_tokens, y_tokens
-    
+ 
     
     def cal_mlp_attr(self, question, label, cot, layers, loss='cot'):
         question_len = len(self.cot_prompter.user_prompt.format(question))
@@ -322,7 +338,7 @@ class Probe(LlmCotProbe):
         
         return [up_scores, down_scores]
     
-    def probe_data(self, data, index, dataloader, full_cot_path, result_path):
+    def probe_data(self, data, index, dataloader, full_cot_path, result_path, dist_toks):
         if self.reg:
             with open(full_cot_path, 'r') as f:
                 cots = json.load(f)
@@ -335,7 +351,7 @@ class Probe(LlmCotProbe):
             label = msg['label']
             pred = msg['pred']
             idx = index[data.index(msg)]
-            question = msg['question']
+            question = msg['question'].split("\n", 1)[0]
             steps = msg['steps']
             pred_cot = '.'.join(steps) + '.'
             
@@ -349,7 +365,7 @@ class Probe(LlmCotProbe):
                     if self.reg:
                         reg_cot = reg_cot.replace(' Reason: ',"")
                 layers = range(40)
-                scores, x_tokens, y_tokens = self.cal_attn(question, pred, pred_cot, layers, result_path)
+                scores, x_tokens, y_tokens = self.cal_attn(question, pred, pred_cot, layers, result_path, dist_toks)
         return scores, x_tokens, y_tokens
         #     ##### ToDO 
         #         if self.loss_type == 'label':
@@ -502,7 +518,7 @@ class Probe(LlmCotProbe):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model', type=str, default='Llama-2-13b-chat-hf')
+    parser.add_argument('--model', type=str, default='Meta-Llama-3-8B-Instruct')
     parser.add_argument('--dataset', type=str, default='babi') #csqa #wino
     parser.add_argument('--mode', type=str, default=None)
     parser.add_argument('--score', type=str, default=None)
@@ -544,13 +560,20 @@ if __name__ == '__main__':
 #    print("Jobs starting…")
 #    futures = []
 
-    w2c = list(filter(lambda x: x not in [2, 10, 5, 8, 9, 11, 13, 14, 16, 17, 20], list(range(1, 21))))
-    w2c_inv = list(filter(lambda x: x not in [1, 2, 3, 4, 5, 6, 8, 9, 12, 13, 14, 15, 16, 18, 19, 20], list(range(1, 21))))
+    w2c = list(filter(lambda x: x not in [2, 3, 4, 6, 8, 9, 12, 13, 16, 17, 18, 19, 20], list(range(1, 21))))
+    w2c_inv = list(filter(lambda x: x in [4, 10, 16], list(range(1, 21))))
 
-    c2w = list(filter(lambda x: x not in [1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 16, 18, 19, 20], list(range(1, 21))))
-    c2w_inv = list(filter(lambda x: x not in [2, 5, 8, 9, 10, 11, 13, 14, 16, 17, 19, 20], list(range(1, 21))))
+    c2w = list(filter(lambda x: x in [4, 10, 16], list(range(1, 21))))
+    c2w_inv = list(filter(lambda x: x in [1, 5, 10, 11, 14], list(range(1, 21))))
     settings = {"w2c": w2c, "w2c_inv": w2c_inv, "c2w": c2w, "c2w_inv": c2w_inv}
 
+    dist_categories = ["subj", "obj", "relation", "location", "nh-subj", "attributes"]
+    dist_toks = []
+    for cat in dist_categories:
+        with open (f"{cat}.txt", "r") as f:
+            for line in f.readlines():
+                dist_toks.append(line.strip())
+    
 
     for name, setting in settings.items():
         for i in setting: 
@@ -599,7 +622,7 @@ if __name__ == '__main__':
                 data = swap_data
             
 
-            results, x_tokens, y_tokens = probe.probe_data(data, index, dataloader, full_cot_path, result_path)
+            results, x_tokens, y_tokens = probe.probe_data(data, index, dataloader, full_cot_path, result_path, dist_toks)
 
             fig_path = os.path.join(result_path, f'task-{i}.pdf')
             

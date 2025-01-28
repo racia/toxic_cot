@@ -135,9 +135,9 @@ class DataLoader():
 
 
     def __shuffle_data(self):
-        tuples = list(zip(self.question_stem_ls, self.__option_ls, self.__label_ls))
+        tuples = list(zip(self.question_stem_ls, self.__option_ls, self.__label_ls)) #, 
         random.shuffle(tuples)
-        self.question_stem_ls, self.__option_ls, self.__label_ls = zip(*tuples)
+        self.question_stem_ls, self.__option_ls, self.__label_ls = zip(*tuples) 
         return 
     
     
@@ -181,7 +181,7 @@ class DataLoader():
             label = self.__get_next_label()
             answer = self.__get_next_answer()
             self.idx += 1
-            return {'stem':stem, 'question':question, 'option':option, 'label':label, 'answer':answer}
+            return {'stem':stem, 'question':question, 'label':label, 'answer':answer, 'option':option} # , 
         else:
             raise StopIteration()
     
@@ -248,6 +248,7 @@ class CoTLoader():
                 if data['question'] in question_set:           
                     index.append(full_cot_data.index(data))
             index = index[:cnt]
+            assert all([len(question_set) != 0, len(index) != 0]) 
             # Get indices of cor → wr and wr → cor data
         data = []
         for idx in index:

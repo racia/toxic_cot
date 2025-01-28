@@ -25,16 +25,23 @@ class KeywordsStoppingCriteria(StoppingCriteria):
             if input_ids[0][-1] in self.keywords:
                 return True
             return False
-stop_words = ['</s>', '<s>']# '</s><s>']
+stop_words = ['</s>', '<s>', '</s><s>']
+
 
 def llama_generate(model, config, tokenizer, input, task):
     stop_ids = [tokenizer.encode(w)[0] for w in stop_words]
     stop_criteria = KeywordsStoppingCriteria(stop_ids)
     with torch.no_grad():
-        inputs = tokenizer(input, return_tensors="pt")
-        input_ids = inputs["input_ids"].to(model.device)
-        output = model.generate(input_ids=input_ids, 
-                                stopping_criteria=[stop_criteria])
+        try:
+            inputs = tokenizer.apply_chat_template(input, return_tensors="pt", tokenize=True, add_generation_prompt=True)
+            input_ids = inputs.to(model.device)
+            output = model.generate(input_ids, max_new_tokens=100, do_sample=True, pad_token_id=tokenizer.eos_token_id)
+            result, pred = parse_result(output, task, tokenizer, chat=False)
+            del input_ids, output
+            torch.cuda.empty_cache()        
+            return result, pred 
+        except Exception as e:
+            print(str(e))
         result, pred = parse_result(output, task, tokenizer)
         del input_ids, output
         torch.cuda.empty_cache()        
@@ -60,7 +67,7 @@ def parse_result(output, task, tokenizer=None, chat=True):
             if not chat:
                 result = tokenizer.batch_decode(output, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0].split(' [/INST]')[-1]
             else:
-                result = tokenizer.decode(output[0]).split(' [/INST] ')[-1]
+                result = tokenizer.decode(output[0]).split(' [/INST] ')[-1].split("</s><s>[INST]")[0]
  
         elif type(output) == str:
             result = output
@@ -76,8 +83,7 @@ def parse_result(output, task, tokenizer=None, chat=True):
             else:
                 pred = 'None'
         else:
-            result = result.split('\n\n')[0]
-            #print(result)
+            result = result.split('\n\n')[-1]
             pred = result.rsplit(':', 1)[-1]
     return result, pred
 
@@ -93,9 +99,7 @@ def baichuan_generate(model, tokenizer, input, task):
 def mistral_generate(model, config, tokenizer, input, task):
     with torch.no_grad():
         inputs = tokenizer.apply_chat_template(input, return_tensors="pt")
-        
         input_ids = inputs.to(model.device)
-        # print(tokenizer.convert_ids_to_tokens(input_ids[0]))
         output = model.generate(input_ids, max_new_tokens=100, do_sample=True)
         # print(output)
         result, pred = parse_result(output, task, tokenizer, chat=False)
@@ -104,7 +108,7 @@ def mistral_generate(model, config, tokenizer, input, task):
         return result, pred 
 
 def get_prompter(model_name, dataset, task):
-    if model_name.startswith('Llama'):
+    if model_name.startswith('Meta'):
         return LlamaPrompter(dataset, task)
     elif model_name.startswith('Vicuna'):
         return VicunaPrompter(dataset, task)
@@ -124,7 +128,7 @@ def get_config(model_name, strategy):
     elif model_name.startswith('Mistral'):
         model_path = f'/mnt/publiccache/huggingface/Mistral-7B-Instruct-v0.2'
         return GenerationConfig.from_pretrained(model_path, **kwargs)
-    elif model_name.startswith('Llama') or model_name.startswith('Baichuan'):
+    elif model_name.startswith('Meta') or model_name.startswith('Baichuan'):
         if '70b' in model_name:
             model_path = '/mnt/publiccache/huggingface/Llama-2-70b-chat-hf'
         else:
@@ -152,8 +156,11 @@ def build_chat_input(model, tokenizer, messages: List[dict], max_new_tokens: int
             rounds.append(round)
         return system, rounds
 
-    max_new_tokens = max_new_tokens or model.generation_config.max_new_tokens
-    max_input_tokens = model.config.model_max_length - max_new_tokens
+    max_new_tokens = 500 or model.generation_config.max_new_tokens
+    assert max_new_tokens is not None
+    max_length = 2000 or model.config.max_length
+    assert max_length is not None
+    max_input_tokens = max_length - max_new_tokens
     system, rounds = _parse_messages(messages, split_role="user")
     system_tokens = tokenizer.encode(system)
     max_history_tokens = max_input_tokens - len(system_tokens)
@@ -163,9 +170,9 @@ def build_chat_input(model, tokenizer, messages: List[dict], max_new_tokens: int
         round_tokens = []
         for message in round:
             if message["role"] == "user":
-                round_tokens.append(model.generation_config.user_token_id)
+                round_tokens.append(tokenizer.convert_tokens_to_ids("user")) # model.generation_config
             else:
-                round_tokens.append(model.generation_config.assistant_token_id)
+                round_tokens.append(tokenizer.convert_tokens_to_ids("assistant"))
             round_tokens.extend(tokenizer.encode(message["content"]))
         if len(history_tokens) == 0 or len(history_tokens) + len(round_tokens) <= max_history_tokens:
             history_tokens = round_tokens + history_tokens  # concat left
@@ -175,7 +182,7 @@ def build_chat_input(model, tokenizer, messages: List[dict], max_new_tokens: int
 
     input_tokens = system_tokens + history_tokens
     if messages[-1]["role"] != "assistant":
-        input_tokens.append(model.generation_config.assistant_token_id)
+        input_tokens.append(tokenizer.convert_tokens_to_ids("assistant")) #model.generation_config.assistant_token_id
     input_tokens = input_tokens[-max_input_tokens:]  # truncate left
     return torch.LongTensor([input_tokens])
 
